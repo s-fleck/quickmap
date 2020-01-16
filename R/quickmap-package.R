@@ -1,16 +1,14 @@
-#' gisco.
-#'
-#' @import assertthat
-#' @importFrom data.table data.table
+#' @keywords internal
 #' @importFrom magrittr %>%
-#' @name gisco
-#' @docType package
+"_PACKAGE"
+
+# The following block is used by usethis to automatically manage
+# roxygen namespace tags. Modify with care!
+## usethis namespace: start
+## usethis namespace: end
 NULL
 
 
-
-
-utils::globalVariables(c("lon", "lat", "lab"))
 
 
 .onLoad <- function(...) {
@@ -21,6 +19,7 @@ utils::globalVariables(c("lon", "lat", "lab"))
     "OpenTopoMap"
   ))
 }
+
 
 
 

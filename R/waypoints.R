@@ -17,9 +17,8 @@ waypoints <- function(x){
 
 
 
-#' Coerce R Object to Waypoints for gisco::gc_route
+#' Coerce R Object to Waypoints
 #'
-#' Create valid inputs for [gc_route()]
 #'
 #' @param x a `matrix`, a `data.frame`, a `sf::sfc_POINT` object, or a
 #' `character` string in the form `"lon1,lat1;lon2,lat2;..."`.
@@ -34,12 +33,8 @@ waypoints <- function(x){
 #' @return `as_waypoints()` returns a `waypoints` object: A numeric `matrix`
 #'   with the columns `lat`and `lon` (in that order)
 #'
-#' @seealso [waypoints_to_string]
 #' @aliases waypoints
 #' @export
-#'
-#' @examples
-#' as_waypoints("16.373831,48.208171;14.437802,50.07554;11.581979,48.135129")
 as_waypoints <- function(x){
   UseMethod("as_waypoints")
 }

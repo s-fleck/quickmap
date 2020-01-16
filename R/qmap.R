@@ -1,9 +1,8 @@
 #' View Spatial Objects in Leaflet
 #'
-#' Can be used to preview [gisco_route] or plain [sf::sf]
-#' objects.
+#' Can be used to preview spatial \R objects
 #'
-#' @param x any \R object. Currently [gisco_route], [sf::sf] (and sfg, sfc),
+#' @param x any \R object. Currently [sf::sf] (and sfg, sfc),
 #'   and `numeric matrices` are supported.
 #'
 #'   If `x` is a `numeric matrix` with two
@@ -19,6 +18,8 @@
 #'   to switch interactively between all supplied providers on the returned
 #'   leaflet map, if `tools == FALSE` only the first provider will be used.
 #'
+#' @param ... passed on to methods.
+#'
 #' @return a [leaflet::leaflet] object
 #' @export
 #'
@@ -32,7 +33,7 @@
 #' )
 #'
 #' \donttest{
-#' qmap(gc_route(wp))
+#'   qmap(wp)
 #' }
 #'
 #'
@@ -180,9 +181,10 @@ qmap.sfg <- function(
   tools = TRUE,
   provider = getOption("qmap.providers", "OpenStreetMap")
 ){
-  tibble::tibble("a" = NA) %>%
-    sf::st_set_geometry(sf::st_sfc(x)) %>%
-    qmap(tools = tools, provider = provider)
+  qmap(
+    sf::st_sf(geometry = sf::st_sfc(x)),
+    tools = tools, provider = provider
+  )
 }
 
 

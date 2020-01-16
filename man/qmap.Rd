@@ -62,12 +62,14 @@ qmap(
 )
 }
 \arguments{
-\item{x}{any \R object. Currently \link{gisco_route}, \link[sf:sf]{sf::sf} (and sfg, sfc),
+\item{x}{any \R object. Currently \link[sf:sf]{sf::sf} (and sfg, sfc),
 and \verb{numeric matrices} are supported.
 
 If \code{x} is a \verb{numeric matrix} with two
 columns, the first two columns will be interpreted as latitude and
 longitude, and its rows as separate points. Further columns are ignored}
+
+\item{...}{passed on to methods.}
 
 \item{tools}{\code{logical} scalar. If \code{TRUE} show additional tools on the
 resulting map (such as a ruler and the ability to switch between several
@@ -84,8 +86,7 @@ leaflet map, if \code{tools == FALSE} only the first provider will be used.}
 a \link[leaflet:leaflet]{leaflet::leaflet} object
 }
 \description{
-Can be used to preview \link{gisco_route} or plain \link[sf:sf]{sf::sf}
-objects.
+Can be used to preview spatial \R objects
 }
 \examples{
 wp <- matrix(
@@ -97,7 +98,7 @@ wp <- matrix(
 )
 
 \donttest{
-qmap(gc_route(wp))
+  qmap(wp)
 }
 
 

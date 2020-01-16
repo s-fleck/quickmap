@@ -5,7 +5,7 @@
 \alias{waypoints}
 \alias{st_as_sfc.waypoints}
 \alias{st_as_sf.waypoints}
-\title{Coerce R Object to Waypoints for gisco::gc_route}
+\title{Coerce R Object to Waypoints}
 \usage{
 as_waypoints(x)
 
@@ -32,11 +32,5 @@ The \code{st_as_sf()} and \code{st_as_sf()} methwods for \code{waypoints}
 \code{\link[sf:st_point]{sf::st_point()}} objects.
 }
 \description{
-Create valid inputs for \code{\link[=gc_route]{gc_route()}}
-}
-\examples{
-as_waypoints("16.373831,48.208171;14.437802,50.07554;11.581979,48.135129")
-}
-\seealso{
-\link{waypoints_to_string}
+Coerce R Object to Waypoints
 }
