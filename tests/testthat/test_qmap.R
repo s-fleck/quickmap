@@ -10,6 +10,50 @@ test_that("map_route creates a leaflet preview", {
       ncol = 2
     )
 
+  class(tdat) <- c("testclass")
+
+  expect_error(qmap(tdat), class = "objectNotSupportedError")
+
+  st_as_sfc.testclass <- function(x){
+    class(x) <- "matrix"
+    message("coercing to coord_matrix")
+    as_coord_matrix(x)
+  }
+
+  expect_message(expect_s3_class(qmap(tdat), "leaflet"), "coercing to coord_matrix")
+
+  st_as_sfc.testclass <- function(x){
+    class(x) <- "matrix"
+    message("coercing to sfc")
+    st_as_sfc(as_coord_matrix(x))
+  }
+
+  expect_message(expect_s3_class(qmap(tdat), "leaflet"), "coercing to sfc")
+
+  st_as_sf.testclass <- function(x){
+    class(x) <- "matrix"
+    message("coercing to sf")
+    st_as_sf(as_coord_matrix(x))
+  }
+
+  expect_message(expect_s3_class(qmap(tdat), "leaflet"), "coercing to sf")
+})
+
+
+
+
+
+test_that("map_route creates a leaflet preview", {
+  tdat <-
+    matrix(
+      c(48.186065, 16.419684,
+        48.207853, 16.373894,
+        48.207853, 16.373894,
+        48.083053, 16.285887),
+      byrow = TRUE,
+      ncol = 2
+    )
+
   expect_s3_class(qmap(tdat), "leaflet")
   colnames(tdat) <- c("lon", "lat")
   expect_s3_class(qmap(tdat), "leaflet")

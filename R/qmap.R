@@ -1,6 +1,12 @@
-#' View Spatial Objects in Leaflet
+#' View spatial objects as interactive leaflet maps
 #'
 #' Can be used to preview spatial \R objects
+#'
+#' @note `quickmap.default()` looks if an [sf::st_as_sf()],
+#'   [sf::st_as_sfc()] or [qmap::as_coord_matrix()] method exists for `x` (in
+#'   that order). If you are a package developer and want to support quickmap
+#'   for a custom S3 class in your package, it is enough to provide one of these
+#'   methods.
 #'
 #' @param x any \R object. Currently [sf::sf] (and sfg, sfc),
 #'   and `numeric matrices` are supported.
@@ -136,10 +142,21 @@ qmap.default <- function(
   tools = TRUE,
   provider = getOption("qmap.providers", "OpenStreetMap")
 ){
-  dd <- tryCatch(
-    as_coord_matrix(x),
-    error = function(e) st_as_sfc(x)
-  )
+  dd <- try(sf::st_as_sf(x), silent = TRUE)
+
+  if (is_try_error(dd))
+    dd <- try(st_as_sfc(x), silent = TRUE)
+
+  if (is_try_error(dd))
+    dd <- try(st_as_sf(as_coord_matrix(x)), silent = TRUE)
+
+  if (is_try_error(dd)){
+    stop(errorCondition(
+      message = paste("cannot generate quickmap for object of class", class_fmt(x)),
+      class = "objectNotSupportedError"
+    ))
+  }
+
   qmap(dd, tools = tools, provider = provider)
 }
 

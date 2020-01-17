@@ -8,7 +8,7 @@
 \alias{qmap.sfc}
 \alias{qmap.sfg}
 \alias{qmap.matrix}
-\title{View Spatial Objects in Leaflet}
+\title{View spatial objects as interactive leaflet maps}
 \usage{
 qmap(
   x,
@@ -87,6 +87,13 @@ a \link[leaflet:leaflet]{leaflet::leaflet} object
 }
 \description{
 Can be used to preview spatial \R objects
+}
+\note{
+\code{quickmap.default()} looks if an \code{\link[sf:st_as_sf]{sf::st_as_sf()}},
+\code{\link[sf:st_as_sfc]{sf::st_as_sfc()}} or \code{\link[qmap:as_coord_matrix]{qmap::as_coord_matrix()}} method exists for \code{x} (in
+that order). If you are a package developer and want to support quickmap
+for a custom S3 class in your package, it is enough to provide one of these
+methods.
 }
 \examples{
 wp <- matrix(
