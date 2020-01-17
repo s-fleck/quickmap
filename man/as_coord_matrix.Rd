@@ -9,13 +9,12 @@
 \usage{
 as_coord_matrix(x, ...)
 
-st_as_sfc.coord_matrix(x)
+\method{st_as_sfc}{coord_matrix}(x)
 
-st_as_sf.coord_matrix(x)
+\method{st_as_sf}{coord_matrix}(x)
 }
 \arguments{
-\item{x}{a \code{matrix}, a \code{data.frame}, a \code{sf::sfc_POINT} object, or a
-\code{character} string in the form \code{"lon1,lat1;lon2,lat2;..."}.
+\item{x}{a \code{matrix}, a \code{data.frame}, a \code{sf::sfc_POINT} object
 
 If \code{x} is a \code{matrix} the columns are assumed to be in the order \verb{lat, lon},
 except if the column names \verb{lat, lon} are already present.

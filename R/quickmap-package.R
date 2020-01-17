@@ -1,5 +1,7 @@
 #' @keywords internal
 #' @importFrom magrittr %>%
+#' @importFrom sf st_as_sf st_as_sfc
+#' @export st_as_sf st_as_sfc
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage

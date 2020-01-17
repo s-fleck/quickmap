@@ -17,11 +17,13 @@ coord_matrix <- function(x){
 
 
 
+
+# as_coord_matrix ---------------------------------------------------------
+
 #' Coerce R Object to Waypoints
 #'
 #'
-#' @param x a `matrix`, a `data.frame`, a `sf::sfc_POINT` object, or a
-#' `character` string in the form `"lon1,lat1;lon2,lat2;..."`.
+#' @param x a `matrix`, a `data.frame`, a `sf::sfc_POINT` object
 #'
 #' If `x` is a `matrix` the columns are assumed to be in the order `lat, lon`,
 #' except if the column names `lat, lon` are already present.
@@ -103,7 +105,7 @@ as_coord_matrix.data.frame <- function(
   latcol = guess_latcol(x)
 ){
   if (any(vapply(x, inherits, logical(1), "sfc", USE.NAMES = FALSE))){
-    return(as_coord_matrix(sf::st_as_sf(x)))
+    return(as_coord_matrix(st_as_sf(x)))
   }
 
   coord_matrix(matrix(
@@ -142,6 +144,8 @@ st_as_sf.coord_matrix <- function(
 
 
 
+
+# utils -------------------------------------------------------------------
 
 guess_loncol <- function(x){
   assert(ncol(x) >= 1, "Input must be an R object with columns (such as a data.frame or matrix)")
@@ -190,6 +194,9 @@ standardize_colpos <- function(
 
 
 
+
+# conditions --------------------------------------------------------------
+
 cannotGuessColumnError <- function(obj, coltype){
   errorCondition(
     paste(
@@ -202,6 +209,7 @@ cannotGuessColumnError <- function(obj, coltype){
 
 
 
+
 multipleCandidateColumnsFoundWarning <- function(obj, pos, coltype){
   columns <- names(obj)[pos]
   warningCondition(
@@ -211,17 +219,4 @@ multipleCandidateColumnsFoundWarning <- function(obj, pos, coltype){
     ),
     class = "multipleCandidateColumnsFoundWarning"
   )
-}
-
-
-
-
-backtick <- function(x){
-  paste0("`", x, "`")
-}
-
-
-
-commalist <- function(x){
-  paste(x, collapse = ", ")
 }

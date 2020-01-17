@@ -138,7 +138,7 @@ qmap.default <- function(
 ){
   dd <- tryCatch(
     as_coord_matrix(x),
-    error = function(e) sf::st_as_sfc(x)
+    error = function(e) st_as_sfc(x)
   )
   qmap(dd, tools = tools, provider = provider)
 }
@@ -155,7 +155,7 @@ qmap.data.frame <- function(
   provider = getOption("qmap.providers", "OpenStreetMap")
 ){
   if (any(vapply(x, inherits, logical(1), "sfc", USE.NAMES = FALSE))){
-    qmap(sf::st_as_sf(x), tools = tools, provider = provider)
+    qmap(st_as_sf(x), tools = tools, provider = provider)
 
   } else {
     NextMethod()
@@ -200,7 +200,7 @@ qmap.matrix <- function(
   provider = getOption("qmap.providers", "OpenStreetMap")
 ){
   x   <- as_coord_matrix(x)
-  res <- sf::st_as_sfc(x)
+  res <- st_as_sfc(x)
 
   if (!is.null(labels)){
     qmap(res, tools = tools, provider = provider) %>%
