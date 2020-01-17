@@ -137,7 +137,7 @@ qmap.default <- function(
   provider = getOption("qmap.providers", "OpenStreetMap")
 ){
   dd <- tryCatch(
-    as_waypoints(x),
+    as_coord_matrix(x),
     error = function(e) sf::st_as_sfc(x)
   )
   qmap(dd, tools = tools, provider = provider)
@@ -199,7 +199,7 @@ qmap.matrix <- function(
   tools = TRUE,
   provider = getOption("qmap.providers", "OpenStreetMap")
 ){
-  x   <- as_waypoints(x)
+  x   <- as_coord_matrix(x)
   res <- sf::st_as_sfc(x)
 
   if (!is.null(labels)){

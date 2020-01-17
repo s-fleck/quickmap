@@ -46,7 +46,7 @@ test_that("qmap.sfg", {
       ncol = 2
     )
 
-  tdat <- sf::st_as_sf(as_waypoints(tdat))$geometry[[1]]
+  tdat <- sf::st_as_sf(as_coord_matrix(tdat))$geometry[[1]]
 
   expect_s3_class(qmap(tdat), "leaflet")
 })
