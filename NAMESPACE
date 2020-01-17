@@ -2,6 +2,7 @@
 
 S3method(as_coord_matrix,data.frame)
 S3method(as_coord_matrix,matrix)
+S3method(as_coord_matrix,numeric)
 S3method(as_coord_matrix,sf)
 S3method(as_coord_matrix,sfc_POINT)
 S3method(qmap,data.frame)

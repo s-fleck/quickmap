@@ -33,3 +33,6 @@ The \code{st_as_sf()} and \code{st_as_sf()} methwods for \code{coord_matrix}
 \description{
 Coerce R Object to Waypoints
 }
+\seealso{
+\url{https://stackoverflow.com/questions/7309121/preferred-order-of-writing-latitude-longitude-tuples}
+}

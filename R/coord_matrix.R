@@ -17,7 +17,6 @@ coord_matrix <- function(x){
 
 
 
-
 # as_coord_matrix ---------------------------------------------------------
 
 #' Coerce R Object to Waypoints
@@ -36,12 +35,28 @@ coord_matrix <- function(x){
 #'   with the columns `lat`and `lon` (in that order)
 #'
 #' @aliases coord_matrix
+#' @seealso \url{https://stackoverflow.com/questions/7309121/preferred-order-of-writing-latitude-longitude-tuples}
 #' @export
 as_coord_matrix <- function(
   x,
   ...
 ){
   UseMethod("as_coord_matrix")
+}
+
+
+
+
+#' @export
+as_coord_matrix.numeric <- function(
+  x,
+  ...
+){
+  assert(
+    identical(length(x), 2L),
+    objectNotSupportedError("only numeric vectors of length 2 can be coerced to coordinate matrices")
+  )
+  as_coord_matrix(matrix(x, ncol = 2, dimnames = list(NULL, names(x))))
 }
 
 
@@ -88,9 +103,17 @@ as_coord_matrix.matrix <- function(
   latcol = guess_latcol(x)
 ){
   assert(identical(ncol(x), 2L))
-  colnames(x) <- c("lon", "lat")
+  force(loncol)
+  force(latcol)
 
-  x <- x[, c("lon", "lat")]
+  if (!length(colnames(x))){
+    colnames(x) <- paste0("V", seq_along(x))
+  }
+
+  colnames(x)[[loncol]] <- "lon"
+  colnames(x)[[latcol]] <- "lat"
+
+  x <- x[, c("lon", "lat"), drop = FALSE]
   coord_matrix(x)
 }
 
@@ -196,6 +219,19 @@ standardize_colpos <- function(
 
 
 # conditions --------------------------------------------------------------
+
+objectNotSupportedError <- function(
+  obj,
+  message = paste("object of type", class_fmt(x), "is not supported")
+){
+  errorCondition(
+    message = message,
+    class = "objectNotSupportedError"
+  )
+
+}
+
+
 
 cannotGuessColumnError <- function(obj, coltype){
   errorCondition(

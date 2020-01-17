@@ -30,6 +30,21 @@ test_that("as_coord_matrix.matrix works as expected", {
 
 
 
+test_that("as_coord_matrix.numeric works as expected", {
+  expect_identical(
+    as_coord_matrix(c(16.422524, 48.185686)),
+    as_coord_matrix(c(lon = 16.422524, lat =  48.185686))
+  )
+
+  expect_identical(
+    as_coord_matrix(c(16.422524, 48.185686)),
+    as_coord_matrix(c(LAT = 48.185686, LoNgItuDE = 16.422524))
+  )
+})
+
+
+
+
 
 test_that("as_coord_matrix.data.frame works as expected", {
 
