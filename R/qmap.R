@@ -247,27 +247,47 @@ qmap.character <- function(
   }
 
   if (is_zipfile(infile)){
-    unzipped <- unzip(infile, exdir = tempdir())
-    on.exit(unlink(unzipped), add = TRUE)
-
-
+    unzipped <- handle_zipfile(infile)
+    on.exit(unlink(unzipped, recursive = TRUE), add = TRUE)
+    infile <- grep("\\.shp$", unzipped, value = TRUE)
   }
 
-  sf::read_sf(infile)
+  if (is_shpfile(infile))
+    qmap(sf::read_sf(infile))
+  else
+    stop()
+}
 
 
 
+handle_zipfile <- function(x){
+  tdir <- tempfile()
+  dir.create(tdir)
+  res <- unzip(x, exdir = tdir)
+  on.exit(unlink(res,  recursive = TRUE))
+  on.exit(unlink(edir, recursive = TRUE), add = TRUE)
 
+  if (sum(grepl("\\.shp$", res)) > 1){
+    stop("More than one shapefile found inside ", x)
+  }
 
+  on.exit(NULL)
+  c(tdir, res)
 }
 
 
 
 is_url <- function(x){
-  is_scalar_character(x) && grepl("^https{0,1}://")
+  is_scalar_character(x) && grepl("^https{0,1}://", x)
 }
 
 
 is_zipfile <- function(x){
-  is_scalar_character(x) && grepl("\\.zip$", ignore.case = TRUE)
+  is_scalar_character(x) && grepl("\\.zip$", x, ignore.case = TRUE)
+}
+
+
+
+is_shpfile <- function(x){
+  is_scalar_character(x) && grepl("\\.shp$", x, ignore.case = TRUE)
 }

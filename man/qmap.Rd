@@ -8,6 +8,7 @@
 \alias{qmap.sfc}
 \alias{qmap.sfg}
 \alias{qmap.matrix}
+\alias{qmap.character}
 \title{View spatial objects as interactive leaflet maps}
 \usage{
 qmap(
@@ -54,6 +55,14 @@ qmap(
 )
 
 \method{qmap}{matrix}(
+  x,
+  labels = NULL,
+  ...,
+  tools = TRUE,
+  provider = getOption("qmap.providers", "OpenStreetMap")
+)
+
+\method{qmap}{character}(
   x,
   labels = NULL,
   ...,
