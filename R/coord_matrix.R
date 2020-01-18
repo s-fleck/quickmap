@@ -114,12 +114,12 @@ as_coord_matrix.matrix <- function(
   loncol = guess_loncol(x),
   latcol = guess_latcol(x)
 ){
-  assert(identical(ncol(x), 2L))
+  assert(identical(ncol(x), 2L) || length(names(x)) > 0)
   force(loncol)
   force(latcol)
 
   if (!length(colnames(x))){
-    colnames(x) <- paste0("V", seq_along(x))
+    colnames(x) <- paste0("V", seq_len(ncol(x)))
   }
 
   colnames(x)[[loncol]] <- "lon"
@@ -155,9 +155,15 @@ as_coord_matrix.data.frame <- function(
 
 # as_sf ------------------------------------------------------------------
 
+#' Coerce coordinate matrices to sf or sfc
+#'
+#' @param x a [coord_matrix]
+#' @param ... ignored
+#'
 #' @export
 st_as_sf.coord_matrix <- function(
-  x
+  x,
+  ...
 ){
   sf::st_sf(geometry = st_as_sfc.coord_matrix(x), crs = EPSG_WGS84)
 }
@@ -169,7 +175,8 @@ st_as_sf.coord_matrix <- function(
 #'   [sf::st_point()] objects.
 #' @export
 st_as_sfc.coord_matrix <- function(
-  x
+  x,
+  ...
 ){
   points <- lapply(seq_len(nrow(x)), function(i) sf::st_point(x[i, c("lon", "lat")]))
   sf::st_sfc(points, crs = EPSG_WGS84)
