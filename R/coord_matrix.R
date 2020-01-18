@@ -19,20 +19,30 @@ coord_matrix <- function(x){
 
 # as_coord_matrix ---------------------------------------------------------
 
-#' Coerce R Object to Waypoints
+#' Coerce an R object to a matrix of coordinates
 #'
+#' @description
+#' A `coord_matrix` is a `matrix` with two columns named `"lon"` and `"lat"` to
+#' represent spatial point data. They can be useful as a transitional
+#' intermediary when converting \R objects to the more widely supported
+#' [sf:sf()] standard.
 #'
-#' @param x a `matrix`, a `data.frame`, a `sf::sfc_POINT` object
+#' `as_coord_matrix()` tries to smartly convert arbitary \R objects to
+#' `coord_matrix`. If you are a package developer and want to add support
+#' for quickmap to your package without having to depend on the heavy \pkg{sf}
+#' package, it is enough to provide an `as_coord_matrix()` method.
 #'
-#' If `x` is a `matrix` the columns are assumed to be in the order `lat, lon`,
-#' except if the column names `lat, lon` are already present.
+#' @param x quickmap currently supports coercion of the following data types:
+#'   * `matrix`: Either a matrix with named `latitude` and `longitude` columns
+#'     or an unnamed two column matrix containing longitude and lattiude
+#'     (in that order)
+#'   * a `data.frame` mit named `latitude` and `longitude` columns
+#'   * an [sf::sfc_POINT] object
+#'   * a named or unmmaned `numeric` vecot of length 2 containign a single
+#'     longitude-latitude coordinate pair
 #'
-#' If `x` is a `data.frame` it must contain a column
-#' named either `"lat"` or `"latitude"` and a column named either `"lon"`,
-#' `"lng"` or `"longitude"` (all case insenstive)
-#'
-#' @return `as_coord_matrix()` returns a `coord_matrix` object: A numeric `matrix`
-#'   with the columns `lat`and `lon` (in that order)
+#' @return `as_coord_matrix()` returns a `coord_matrix` object: A numeric
+#'   `matrix` with the columns `"lon"`and `"lat"` (in that order)
 #'
 #' @aliases coord_matrix
 #' @seealso \url{https://stackoverflow.com/questions/7309121/preferred-order-of-writing-latitude-longitude-tuples}
@@ -46,7 +56,7 @@ as_coord_matrix <- function(
 
 
 
-
+#' @rdname as_coord_matrix
 #' @export
 as_coord_matrix.numeric <- function(
   x,
@@ -61,7 +71,7 @@ as_coord_matrix.numeric <- function(
 
 
 
-
+#' @rdname as_coord_matrix
 #' @export
 as_coord_matrix.sf <- function(
   x,
@@ -74,11 +84,9 @@ as_coord_matrix.sf <- function(
 
 
 
-
+#' @rdname as_coord_matrix
 #' @export
-as_coord_matrix.sfc_POINT <- function(x){
-  assert_namespace("sf")
-
+as_coord_matrix.sfc_POINT <- function(x, ...){
   empty <- matrix(c(NA_real_, NA_real_), ncol = 2)
 
   res <- vapply(
@@ -95,6 +103,10 @@ as_coord_matrix.sfc_POINT <- function(x){
 
 
 
+#' @rdname as_coord_matrix
+#' @param loncol,latcol `character` scalars. Names of the columns of
+#'   `x` containing longitude and lattiude. The default is to try guessing the
+#'   appropriate columns.
 #' @export
 as_coord_matrix.matrix <- function(
   x,
@@ -119,7 +131,7 @@ as_coord_matrix.matrix <- function(
 
 
 
-
+#' @rdname as_coord_matrix
 #' @export
 as_coord_matrix.data.frame <- function(
   x,
@@ -141,9 +153,18 @@ as_coord_matrix.data.frame <- function(
 
 
 
-# as_sfc ------------------------------------------------------------------
+# as_sf ------------------------------------------------------------------
 
-#' @rdname as_coord_matrix
+#' @export
+st_as_sf.coord_matrix <- function(
+  x
+){
+  sf::st_sf(geometry = st_as_sfc.coord_matrix(x), crs = EPSG_WGS84)
+}
+
+
+
+#' @rdname st_as_sf.coord_matrix
 #' @return The `st_as_sf()` and `st_as_sf()` methwods for `coord_matrix`
 #'   [sf::st_point()] objects.
 #' @export
@@ -152,17 +173,6 @@ st_as_sfc.coord_matrix <- function(
 ){
   points <- lapply(seq_len(nrow(x)), function(i) sf::st_point(x[i, c("lon", "lat")]))
   sf::st_sfc(points, crs = EPSG_WGS84)
-}
-
-
-
-
-#' @rdname as_coord_matrix
-#' @export
-st_as_sf.coord_matrix <- function(
-  x
-){
-  sf::st_sf(geometry = st_as_sfc.coord_matrix(x), crs = EPSG_WGS84)
 }
 
 

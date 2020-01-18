@@ -3,35 +3,55 @@
 \name{as_coord_matrix}
 \alias{as_coord_matrix}
 \alias{coord_matrix}
-\alias{st_as_sfc.coord_matrix}
-\alias{st_as_sf.coord_matrix}
-\title{Coerce R Object to Waypoints}
+\alias{as_coord_matrix.numeric}
+\alias{as_coord_matrix.sf}
+\alias{as_coord_matrix.sfc_POINT}
+\alias{as_coord_matrix.matrix}
+\alias{as_coord_matrix.data.frame}
+\title{Coerce an R object to a matrix of coordinates}
 \usage{
 as_coord_matrix(x, ...)
 
-\method{st_as_sfc}{coord_matrix}(x)
+\method{as_coord_matrix}{numeric}(x, ...)
 
-\method{st_as_sf}{coord_matrix}(x)
+\method{as_coord_matrix}{sf}(x, ...)
+
+\method{as_coord_matrix}{sfc_POINT}(x, ...)
+
+\method{as_coord_matrix}{matrix}(x, ..., loncol = guess_loncol(x), latcol = guess_latcol(x))
+
+\method{as_coord_matrix}{data.frame}(x, ..., loncol = guess_loncol(x), latcol = guess_latcol(x))
 }
 \arguments{
-\item{x}{a \code{matrix}, a \code{data.frame}, a \code{sf::sfc_POINT} object
+\item{x}{quickmap currently supports coercion of the following data types:
+\itemize{
+\item \code{matrix}: Either a matrix with named \code{latitude} and \code{longitude} columns
+or an unnamed two column matrix containing longitude and lattiude
+(in that order)
+\item a \code{data.frame} mit named \code{latitude} and \code{longitude} columns
+\item an \link[sf:sfc_POINT]{sf::sfc_POINT} object
+\item a named or unmmaned \code{numeric} vecot of length 2 containign a single
+longitude-latitude coordinate pair
+}}
 
-If \code{x} is a \code{matrix} the columns are assumed to be in the order \verb{lat, lon},
-except if the column names \verb{lat, lon} are already present.
-
-If \code{x} is a \code{data.frame} it must contain a column
-named either \code{"lat"} or \code{"latitude"} and a column named either \code{"lon"},
-\code{"lng"} or \code{"longitude"} (all case insenstive)}
+\item{loncol, latcol}{\code{character} scalars. Names of the columns of
+\code{x} containing longitude and lattiude. The default is to try guessing the
+appropriate columns.}
 }
 \value{
-\code{as_coord_matrix()} returns a \code{coord_matrix} object: A numeric \code{matrix}
-with the columns \code{lat}and \code{lon} (in that order)
-
-The \code{st_as_sf()} and \code{st_as_sf()} methwods for \code{coord_matrix}
-\code{\link[sf:st_point]{sf::st_point()}} objects.
+\code{as_coord_matrix()} returns a \code{coord_matrix} object: A numeric
+\code{matrix} with the columns \code{"lon"}and \code{"lat"} (in that order)
 }
 \description{
-Coerce R Object to Waypoints
+A \code{coord_matrix} is a \code{matrix} with two columns named \code{"lon"} and \code{"lat"} to
+represent spatial point data. They can be useful as a transitional
+intermediary when converting \R objects to the more widely supported
+\code{\link[=sf:sf]{sf:sf()}} standard.
+
+\code{as_coord_matrix()} tries to smartly convert arbitary \R objects to
+\code{coord_matrix}. If you are a package developer and want to add support
+for quickmap to your package without having to depend on the heavy \pkg{sf}
+package, it is enough to provide an \code{as_coord_matrix()} method.
 }
 \seealso{
 \url{https://stackoverflow.com/questions/7309121/preferred-order-of-writing-latitude-longitude-tuples}
