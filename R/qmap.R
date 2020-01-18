@@ -8,12 +8,7 @@
 #'   for a custom S3 class in your package, it is enough to provide one of these
 #'   methods.
 #'
-#' @param x any \R object. Currently [sf::sf] (and sfg, sfc),
-#'   and `numeric matrices` are supported.
-#'
-#'   If `x` is a `numeric matrix` with two
-#'   columns, the first two columns will be interpreted as latitude and
-#'   longitude, and its rows as separate points. Further columns are ignored
+#' @inheritParams as_coord_matrix
 #'
 #' @param tools `logical` scalar. If `TRUE` show additional tools on the
 #'   resulting map (such as a ruler and the ability to switch between several
@@ -30,16 +25,18 @@
 #' @export
 #'
 #' @examples
+#'
 #' wp <- matrix(
-#'   c(48.186065, 16.419684,
-#'     48.207853, 16.373894,
-#'     48.083053, 16.285887),
+#'   c(16.419684, 48.186065,
+#'     16.373894, 48.207853,
+#'     16.285887, 48.083053)
 #'   byrow = TRUE,
 #'   ncol = 2
 #' )
 #'
 #' \donttest{
 #'   qmap(wp)
+#'   qmap(c(16.419684, 48.186065))
 #' }
 #'
 #'
@@ -226,4 +223,51 @@ qmap.matrix <- function(
   } else {
     qmap(res, tools = tools, provider = provider)
   }
+}
+
+
+
+
+#' @rdname qmap
+#' @export
+qmap.character <- function(
+  x,
+  labels = NULL,
+  ...,
+  tools = TRUE,
+  provider = getOption("qmap.providers", "OpenStreetMap")
+){
+  infile <- x
+
+  if (is_url(infile)){
+    tf <- paste0(tempfile(), basename(x))
+    on.exit(unlink(tf))
+    download.file(x, destfile = tf)
+    infile <- tf
+  }
+
+  if (is_zipfile(infile)){
+    unzipped <- unzip(infile, exdir = tempdir())
+    on.exit(unlink(unzipped), add = TRUE)
+
+
+  }
+
+  sf::read_sf(infile)
+
+
+
+
+
+}
+
+
+
+is_url <- function(x){
+  is_scalar_character(x) && grepl("^https{0,1}://")
+}
+
+
+is_zipfile <- function(x){
+  is_scalar_character(x) && grepl("\\.zip$", ignore.case = TRUE)
 }

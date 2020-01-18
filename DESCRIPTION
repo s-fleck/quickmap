@@ -1,20 +1,25 @@
-Package: quickmap
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.0.1
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Package: quickmap
+Title:  Quickly Create Maps from R objects
+Version: 0.0.2
+Authors@R: 
+    person(given = "Stefan",
+           family = "Fleck",
+           role = c("aut", "cre"),
+           email = "stefan.b.fleck@gmail.com",
+           comment = c(ORCID = "0000-0003-3344-9851"))
+Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
+Description: Preview a wide range of common formats for spatial data as 
+  interactive leaflet maps.
 License: MIT + file LICENSE
+Imports:
+    leaflet,
+    magrittr,
+    sf
+Suggests: 
+    covr,
+    testthat
 Encoding: UTF-8
 LazyData: true
-Imports:
-  leaflet,
-  sf,
-  magrittr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2.9000
-Suggests: 
-    testthat,
-    covr

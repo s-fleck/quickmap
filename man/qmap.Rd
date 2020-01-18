@@ -62,12 +62,16 @@ qmap(
 )
 }
 \arguments{
-\item{x}{any \R object. Currently \link[sf:sf]{sf::sf} (and sfg, sfc),
-and \verb{numeric matrices} are supported.
-
-If \code{x} is a \verb{numeric matrix} with two
-columns, the first two columns will be interpreted as latitude and
-longitude, and its rows as separate points. Further columns are ignored}
+\item{x}{quickmap currently supports coercion of the following data types:
+\itemize{
+\item \code{matrix}: Either a matrix with named \code{latitude} and \code{longitude} columns
+or an unnamed two column matrix containing longitude and lattiude
+(in that order)
+\item a \code{data.frame} mit named \code{latitude} and \code{longitude} columns
+\item an \link[sf:sfc_POINT]{sf::sfc_POINT} object
+\item a named or unmmaned \code{numeric} vecot of length 2 containign a single
+longitude-latitude coordinate pair
+}}
 
 \item{...}{passed on to methods.}
 
@@ -96,16 +100,18 @@ for a custom S3 class in your package, it is enough to provide one of these
 methods.
 }
 \examples{
+
 wp <- matrix(
-  c(48.186065, 16.419684,
-    48.207853, 16.373894,
-    48.083053, 16.285887),
+  c(16.419684, 48.186065,
+    16.373894, 48.207853,
+    16.285887, 48.083053)
   byrow = TRUE,
   ncol = 2
 )
 
 \donttest{
   qmap(wp)
+  qmap(c(16.419684, 48.186065))
 }
 
 

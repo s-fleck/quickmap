@@ -4,9 +4,13 @@
 \name{quickmap-package}
 \alias{quickmap}
 \alias{quickmap-package}
-\title{quickmap: What the Package Does (Title Case)}
+\title{quickmap: Quickly Create Maps from R objects}
 \description{
-More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Preview a wide range of common formats for spatial data as 
+  interactive leaflet maps.
+}
+\author{
+\strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com} (\href{https://orcid.org/0000-0003-3344-9851}{ORCID})
+
 }
 \keyword{internal}
