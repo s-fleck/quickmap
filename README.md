@@ -5,12 +5,16 @@
 
 <!-- badges: start -->
 
+[![Travis build
+status](https://travis-ci.org/s-fleck/quickmap.svg?branch=master)](https://travis-ci.org/s-fleck/quickmap)
+[![Codecov test
+coverage](https://codecov.io/gh/s-fleck/quickmap/branch/master/graph/badge.svg)](https://codecov.io/gh/s-fleck/quickmap?branch=master)
 <!-- badges: end -->
 
 **quickmap** is a package for previewing spatial data as interactive
 leaflet maps in R. It distinquishes itself from other similar R packages
 by beeing able to automatically coerce a wide variety of inputs to
-leaflet maps
+leaflet maps with minimal user interaction.
 
 ## Installation
 
