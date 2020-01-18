@@ -1,33 +1,29 @@
 
-test_that("map_route creates a leaflet preview", {
+test_that("qmap uses as_coord_matrix/st_as_sfc/st_as_sf in the correct order if available", {
   tdat <-
-    matrix(
+    list(matrix(
       c(48.186065, 16.419684,
         48.207853, 16.373894,
         48.207853, 16.373894,
         48.083053, 16.285887),
       byrow = TRUE,
       ncol = 2
-    )
-
+    ))
   class(tdat) <- c("testclass")
-
   expect_error(qmap(tdat), class = "objectNotSupportedError")
 
-  st_as_sfc.testclass <- function(x){
-    class(x) <- "matrix"
+  as_coord_matrix.testclass <- function(x){
     message("coercing to coord_matrix")
-    as_coord_matrix(x)
+    as_coord_matrix(x[[1]])
   }
-
+  registerS3method("as_coord_matrix", "testclass", as_coord_matrix.testclass)
   expect_message(expect_s3_class(qmap(tdat), "leaflet"), "coercing to coord_matrix")
 
   st_as_sfc.testclass <- function(x){
-    class(x) <- "matrix"
     message("coercing to sfc")
-    st_as_sfc(as_coord_matrix(x))
+    st_as_sfc(as_coord_matrix(x)[[1]])
   }
-
+  registerS3method("st_as_sfc", "testclass", st_as_sfc.testclass)
   expect_message(expect_s3_class(qmap(tdat), "leaflet"), "coercing to sfc")
 
   st_as_sf.testclass <- function(x){
@@ -35,7 +31,7 @@ test_that("map_route creates a leaflet preview", {
     message("coercing to sf")
     st_as_sf(as_coord_matrix(x))
   }
-
+  registerS3method("st_as_sf", "testclass", st_as_sf.testclass)
   expect_message(expect_s3_class(qmap(tdat), "leaflet"), "coercing to sf")
 })
 
@@ -94,3 +90,16 @@ test_that("qmap.sfg", {
 
   expect_s3_class(qmap(tdat), "leaflet")
 })
+
+
+
+
+test_that("qmap.character", {
+  skip("takes too long")
+
+  expect_s3_class(
+    qmap("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip"),
+    "leaflet"
+  )
+})
+
