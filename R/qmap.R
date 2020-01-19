@@ -3,7 +3,7 @@
 #' Can be used to preview spatial \R objects
 #'
 #' @note `quickmap.default()` looks if an [sf::st_as_sf()],
-#'   [sf::st_as_sfc()] or [qmap::as_coord_matrix()] method exists for `x` (in
+#'   [sf::st_as_sfc()] or [quickmap::as_coord_matrix()] method exists for `x` (in
 #'   that order). If you are a package developer and want to support quickmap
 #'   for a custom S3 class in your package, it is enough to provide one of these
 #'   methods.
@@ -25,11 +25,10 @@
 #' @export
 #'
 #' @examples
-#'
 #' wp <- matrix(
 #'   c(16.419684, 48.186065,
 #'     16.373894, 48.207853,
-#'     16.285887, 48.083053)
+#'     16.285887, 48.083053),
 #'   byrow = TRUE,
 #'   ncol = 2
 #' )
@@ -38,8 +37,6 @@
 #'   qmap(wp)
 #'   qmap(c(16.419684, 48.186065))
 #' }
-#'
-#'
 qmap <- function(
   x,
   ...,
@@ -186,7 +183,6 @@ qmap.sfc <- qmap.sf
 
 
 
-
 #' @rdname qmap
 #' @export
 qmap.sfg <- function(
@@ -242,7 +238,7 @@ qmap.character <- function(
   if (is_url(infile)){
     tf <- paste0(tempfile(), basename(x))
     on.exit(unlink(tf))
-    download.file(x, destfile = tf)
+    utils::download.file(x, destfile = tf)
     infile <- tf
   }
 
@@ -260,12 +256,15 @@ qmap.character <- function(
 
 
 
+
 handle_zipfile <- function(x){
   tdir <- tempfile()
   dir.create(tdir)
-  res <- unzip(x, exdir = tdir)
-  on.exit(unlink(res,  recursive = TRUE))
-  on.exit(unlink(edir, recursive = TRUE), add = TRUE)
+  res <- utils::unzip(x, exdir = tdir)
+  on.exit({
+    unlink(res,  recursive = TRUE)
+    unlink(tdir, recursive = TRUE)
+  }, add = TRUE)
 
   if (sum(grepl("\\.shp$", res)) > 1){
     stop("More than one shapefile found inside ", x)
@@ -277,14 +276,18 @@ handle_zipfile <- function(x){
 
 
 
+
 is_url <- function(x){
   is_scalar_character(x) && grepl("^https{0,1}://", x)
 }
 
 
+
+
 is_zipfile <- function(x){
   is_scalar_character(x) && grepl("\\.zip$", x, ignore.case = TRUE)
 }
+
 
 
 

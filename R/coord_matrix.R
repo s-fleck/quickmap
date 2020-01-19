@@ -24,8 +24,7 @@ coord_matrix <- function(x){
 #' @description
 #' A `coord_matrix` is a `matrix` with two columns named `"lon"` and `"lat"` to
 #' represent spatial point data. They can be useful as a transitional
-#' intermediary when converting \R objects to the more widely supported
-#' [sf:sf()] standard.
+#' intermediary when converting arbitrary \R objects to [sf::sf()] objects.
 #'
 #' `as_coord_matrix()` tries to smartly convert arbitary \R objects to
 #' `coord_matrix`. If you are a package developer and want to add support
@@ -37,12 +36,14 @@ coord_matrix <- function(x){
 #'     or an unnamed two column matrix containing longitude and lattiude
 #'     (in that order)
 #'   * a `data.frame` mit named `latitude` and `longitude` columns
-#'   * an [sf::sfc_POINT] object
+#'   * an [sf::sfc_POINT][sf::sfc] object
 #'   * a named or unmmaned `numeric` vecot of length 2 containign a single
 #'     longitude-latitude coordinate pair
 #'
 #' @return `as_coord_matrix()` returns a `coord_matrix` object: A numeric
 #'   `matrix` with the columns `"lon"`and `"lat"` (in that order)
+#'
+#' @param ... passed on to methods
 #'
 #' @aliases coord_matrix
 #' @seealso \url{https://stackoverflow.com/questions/7309121/preferred-order-of-writing-latitude-longitude-tuples}
@@ -53,6 +54,7 @@ as_coord_matrix <- function(
 ){
   UseMethod("as_coord_matrix")
 }
+
 
 
 
@@ -71,6 +73,7 @@ as_coord_matrix.numeric <- function(
 
 
 
+
 #' @rdname as_coord_matrix
 #' @export
 as_coord_matrix.sf <- function(
@@ -81,6 +84,7 @@ as_coord_matrix.sf <- function(
   colnames(res)[1:2] <- c("lon", "lat")
   coord_matrix(res[, c("lon", "lat"), drop = FALSE])
 }
+
 
 
 
@@ -131,6 +135,7 @@ as_coord_matrix.matrix <- function(
 
 
 
+
 #' @rdname as_coord_matrix
 #' @export
 as_coord_matrix.data.frame <- function(
@@ -155,11 +160,21 @@ as_coord_matrix.data.frame <- function(
 
 # as_sf ------------------------------------------------------------------
 
-#' Coerce coordinate matrices to sf or sfc
+#' Convert coordinate matrices to sf objects
 #'
+#' @seealso [sf::st_as_sf()]
+#' @name st_as_sf
+#' @importFrom sf st_as_sf
+#' @export st_as_sf
+NULL
+
+
+
+
+#' @rdname st_as_sf
 #' @param x a [coord_matrix]
 #' @param ... ignored
-#'
+#' @return an [sf::sf()] object with an `sfc_POINT`-geometry column
 #' @export
 st_as_sf.coord_matrix <- function(
   x,
@@ -170,9 +185,21 @@ st_as_sf.coord_matrix <- function(
 
 
 
-#' @rdname st_as_sf.coord_matrix
-#' @return The `st_as_sf()` and `st_as_sf()` methwods for `coord_matrix`
-#'   [sf::st_point()] objects.
+#' Convert coordinate matrices to sfc objects
+#'
+#' @seealso [sf::st_as_sfc()]
+#' @name st_as_sfc
+#' @importFrom sf st_as_sfc
+#' @export st_as_sfc
+NULL
+
+
+
+
+#' @rdname st_as_sfc
+#' @param x a [coord_matrix]
+#' @param ... ignored
+#' @return an [sf::sfc()] object of subclass `sfc_POINT`
 #' @export
 st_as_sfc.coord_matrix <- function(
   x,
@@ -215,6 +242,7 @@ guess_latcol <- function(x){
 
 
 
+
 standardize_colpos <- function(
   pos,
   obj,
@@ -234,19 +262,18 @@ standardize_colpos <- function(
 
 
 
-
 # conditions --------------------------------------------------------------
 
 objectNotSupportedError <- function(
   obj,
-  message = paste("object of type", class_fmt(x), "is not supported")
+  message = paste("object of type", class_fmt(obj), "is not supported")
 ){
   errorCondition(
     message = message,
     class = "objectNotSupportedError"
   )
-
 }
+
 
 
 

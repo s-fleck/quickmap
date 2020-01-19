@@ -29,10 +29,12 @@ as_coord_matrix(x, ...)
 or an unnamed two column matrix containing longitude and lattiude
 (in that order)
 \item a \code{data.frame} mit named \code{latitude} and \code{longitude} columns
-\item an \link[sf:sfc_POINT]{sf::sfc_POINT} object
+\item an \link[sf:sfc]{sf::sfc_POINT} object
 \item a named or unmmaned \code{numeric} vecot of length 2 containign a single
 longitude-latitude coordinate pair
 }}
+
+\item{...}{passed on to methods}
 
 \item{loncol, latcol}{\code{character} scalars. Names of the columns of
 \code{x} containing longitude and lattiude. The default is to try guessing the
@@ -45,8 +47,7 @@ appropriate columns.}
 \description{
 A \code{coord_matrix} is a \code{matrix} with two columns named \code{"lon"} and \code{"lat"} to
 represent spatial point data. They can be useful as a transitional
-intermediary when converting \R objects to the more widely supported
-\code{\link[=sf:sf]{sf:sf()}} standard.
+intermediary when converting arbitrary \R objects to \code{\link[sf:sf]{sf::sf()}} objects.
 
 \code{as_coord_matrix()} tries to smartly convert arbitary \R objects to
 \code{coord_matrix}. If you are a package developer and want to add support

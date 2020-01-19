@@ -1,7 +1,7 @@
 context("coord_matrix")
 
 
-test_that("as_coord_matrix.matrix works as expected", {
+test_that("guess_loncol/guess_latcol work as expected", {
   coord_cols <- c("lon", "lat")
   x <- matrix(c(1, 2, 3, 4, 5, 6), ncol = 2)
 

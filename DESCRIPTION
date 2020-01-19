@@ -15,7 +15,8 @@ License: MIT + file LICENSE
 Imports:
     leaflet,
     magrittr,
-    sf
+    sf,
+    utils
 Suggests: 
     covr,
     testthat

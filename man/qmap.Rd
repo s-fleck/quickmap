@@ -77,7 +77,7 @@ qmap(
 or an unnamed two column matrix containing longitude and lattiude
 (in that order)
 \item a \code{data.frame} mit named \code{latitude} and \code{longitude} columns
-\item an \link[sf:sfc_POINT]{sf::sfc_POINT} object
+\item an \link[sf:sfc]{sf::sfc_POINT} object
 \item a named or unmmaned \code{numeric} vecot of length 2 containign a single
 longitude-latitude coordinate pair
 }}
@@ -103,17 +103,16 @@ Can be used to preview spatial \R objects
 }
 \note{
 \code{quickmap.default()} looks if an \code{\link[sf:st_as_sf]{sf::st_as_sf()}},
-\code{\link[sf:st_as_sfc]{sf::st_as_sfc()}} or \code{\link[qmap:as_coord_matrix]{qmap::as_coord_matrix()}} method exists for \code{x} (in
+\code{\link[sf:st_as_sfc]{sf::st_as_sfc()}} or \code{\link[quickmap:as_coord_matrix]{quickmap::as_coord_matrix()}} method exists for \code{x} (in
 that order). If you are a package developer and want to support quickmap
 for a custom S3 class in your package, it is enough to provide one of these
 methods.
 }
 \examples{
-
 wp <- matrix(
   c(16.419684, 48.186065,
     16.373894, 48.207853,
-    16.285887, 48.083053)
+    16.285887, 48.083053),
   byrow = TRUE,
   ncol = 2
 )
@@ -122,6 +121,4 @@ wp <- matrix(
   qmap(wp)
   qmap(c(16.419684, 48.186065))
 }
-
-
 }
