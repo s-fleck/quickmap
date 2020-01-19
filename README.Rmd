@@ -1,5 +1,7 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -21,10 +23,9 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 **quickmap** is a package for previewing spatial data as interactive
-leaflet maps in R. It distinquishes itself from other similar R packages by
-beeing able to automatically coerce a wide variety of inputs to leaflet maps
-with minimal user interaction.
-
+leaflet maps in R. In contrast so other similar packages, quickmap does not
+require an `sf` or `sp` object as input, but just works with normal data.frames
+or matrices that have latitude and longitude columns. 
 
 
 ## Installation
@@ -37,14 +38,25 @@ devtools::install_github("s-fleck/quickmap")
 ```
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
 ```{r example, eval = FALSE}
 library(quickmap)
 
 # coordinate pairs without names are interpreted as longitude/latitude
-quickmap::qmap(c(16.422524, 48.185686))
+qmap(c(16.422524, 48.185686))
 
-# quickmap tries its best to guess the correct order from names
-quickmap::qmap(c(LAT = 48.185686, LoNgItuDE = 16.422524))
+# if you supply column names, qmap uses those to identify the correct columns
+qmap(c(LAT = 48.185686, LoNgItuDE = 16.422524))
+
+# when supplied with an url or file system path, qmap tries its best to discover
+# supported spatial datasets
+qmap("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip")
+
+# You can call qmap() on existing leaflet objects to add background tiles and
+# a ruler for measuring distance
+library(leaflet)
+lf <- leaflet::leaflet() %>% 
+  leaflet::addCircleMarkers(lng = 16.422524, lat = 48.185686)
+
+lf
+qmap(lf)
 ```
