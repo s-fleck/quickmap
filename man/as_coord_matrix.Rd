@@ -3,6 +3,7 @@
 \name{as_coord_matrix}
 \alias{as_coord_matrix}
 \alias{coord_matrix}
+\alias{as_coord_matrix.default}
 \alias{as_coord_matrix.numeric}
 \alias{as_coord_matrix.sf}
 \alias{as_coord_matrix.sfc_POINT}
@@ -11,6 +12,8 @@
 \title{Coerce an R object to a matrix of coordinates}
 \usage{
 as_coord_matrix(x, ...)
+
+\method{as_coord_matrix}{default}(x, ...)
 
 \method{as_coord_matrix}{numeric}(x, ...)
 
@@ -46,10 +49,10 @@ appropriate columns.}
 }
 \description{
 A \code{coord_matrix} is a \code{matrix} with two columns named \code{"lon"} and \code{"lat"} to
-represent spatial point data. They can be useful as a transitional
-intermediary when converting arbitrary \R objects to \code{\link[sf:sf]{sf::sf()}} objects.
+represent spatial point data. They are used as an intermediary when
+converting some \R objects to \code{\link[sf:sf]{sf::sf()}} objects.
 
-\code{as_coord_matrix()} tries to smartly convert arbitary \R objects to
+\code{as_coord_matrix()} can smartly convert a range of \R objects to
 \code{coord_matrix}. If you are a package developer and want to add support
 for quickmap to your package without having to depend on the heavy \pkg{sf}
 package, it is enough to provide an \code{as_coord_matrix()} method.

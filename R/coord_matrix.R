@@ -23,10 +23,10 @@ coord_matrix <- function(x){
 #'
 #' @description
 #' A `coord_matrix` is a `matrix` with two columns named `"lon"` and `"lat"` to
-#' represent spatial point data. They can be useful as a transitional
-#' intermediary when converting arbitrary \R objects to [sf::sf()] objects.
+#' represent spatial point data. They are used as an intermediary when
+#' converting some \R objects to [sf::sf()] objects.
 #'
-#' `as_coord_matrix()` tries to smartly convert arbitary \R objects to
+#' `as_coord_matrix()` can smartly convert a range of \R objects to
 #' `coord_matrix`. If you are a package developer and want to add support
 #' for quickmap to your package without having to depend on the heavy \pkg{sf}
 #' package, it is enough to provide an `as_coord_matrix()` method.
@@ -53,6 +53,23 @@ as_coord_matrix <- function(
   ...
 ){
   UseMethod("as_coord_matrix")
+}
+
+
+
+
+#' @rdname as_coord_matrix
+#' @export
+as_coord_matrix.default <- function(
+  x,
+  ...
+){
+  tryCatch(
+    as_coord_matrix(st_as_sf(x)),
+    error = function(e) stop(objectNotSupportedError(
+        message = paste("don't know how convert objects of type", class_fmt(x), "to coord_matrix")
+    ))
+  )
 }
 
 

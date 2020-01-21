@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/s-fleck/quickmap.svg?branch=master)](https://travis-ci.org/s-fleck/quickmap)
 [![Codecov test coverage](https://codecov.io/gh/s-fleck/quickmap/branch/master/graph/badge.svg)](https://codecov.io/gh/s-fleck/quickmap?branch=master)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
 **quickmap** is a package for previewing spatial data as interactive

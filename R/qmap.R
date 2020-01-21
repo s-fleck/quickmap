@@ -145,9 +145,8 @@ qmap.default <- function(
     dd <- try(st_as_sf(as_coord_matrix(x)), silent = TRUE)
 
   if (is_try_error(dd)){
-    stop(errorCondition(
-      message = paste("cannot generate quickmap for object of class", class_fmt(x)),
-      class = "objectNotSupportedError"
+    stop(objectNotSupportedError(
+      message = paste("don't know how to generate a map for object of class", class_fmt(x))
     ))
   }
 

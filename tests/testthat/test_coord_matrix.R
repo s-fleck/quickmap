@@ -60,3 +60,13 @@ test_that("as_coord_matrix.data.frame works as expected", {
   expect_identical(x[, "lon"], y[, "lat"])
   expect_identical(colnames(x), colnames(y))
 })
+
+
+
+
+test_that("as_coord_matrix.default fails nicely on unspported objects", {
+
+  expect_error(as_coord_matrix("blubb"), class = "objectNotSupportedError")
+
+})
+
