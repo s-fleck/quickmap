@@ -9,12 +9,17 @@
 status](https://travis-ci.org/s-fleck/quickmap.svg?branch=master)](https://travis-ci.org/s-fleck/quickmap)
 [![Codecov test
 coverage](https://codecov.io/gh/s-fleck/quickmap/branch/master/graph/badge.svg)](https://codecov.io/gh/s-fleck/quickmap?branch=master)
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-**quickmap** is a package for previewing spatial data as interactive
-leaflet maps in R. In contrast so other similar packages, quickmap does
-not require an `sf` or `sp` object as input, but just works with normal
-data.frames or matrices that have latitude and longitude columns.
+**quickmap** is a package for previewing spatial data as leaflet maps in
+R. It is designed primarily for interactive use and produces nice maps
+with minimal setup required. In contrast to other similar packages,
+quickmap does not require an `sf` or `sp` object as input, but just
+works with normal `data.frames` or `matrices` that have latitude and
+longitude columns. See [the function
+reference](https://s-fleck.github.io/quickmap/) for more infos.
 
 ## Installation
 
