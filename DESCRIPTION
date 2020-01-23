@@ -1,7 +1,7 @@
 Type: Package
 Package: quickmap
 Title:  Quickly Create Maps from R objects
-Version: 0.0.3
+Version: 0.1.0
 Authors@R: 
     person(given = "Stefan",
            family = "Fleck",
