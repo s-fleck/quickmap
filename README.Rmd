@@ -32,6 +32,7 @@ See [the function reference](https://s-fleck.github.io/quickmap/) for more
 infos.
 
 
+
 ## Installation
 
 And the development version from [GitHub](https://github.com/) with:
@@ -40,6 +41,18 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("s-fleck/quickmap")
 ```
+
+
+## CRAN release
+
+A CRAN release is currently not planned. quickmap is pretty stable 
+but it currently has few features to distinquish itself from 
+[mapview](https://r-spatial.github.io/mapview/). If you like
+quickmap's simple API and automatic input coercion and would like to see it
+on CRAN, please file an issue on the issue tracker.
+
+
+
 ## Example
 
 ```{r example, eval = FALSE}
@@ -64,3 +77,4 @@ lf <- leaflet::leaflet() %>%
 lf
 qmap(lf)
 ```
+
