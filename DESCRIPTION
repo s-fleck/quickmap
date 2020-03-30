@@ -1,7 +1,7 @@
 Type: Package
 Package: quickmap
-Title:  Quickly Create Maps from R objects
-Version: 0.1.0
+Title: Quickly Create Maps from R objects
+Version: 0.1.1
 Authors@R: 
     person(given = "Stefan",
            family = "Fleck",
@@ -23,4 +23,4 @@ Suggests:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2.9000
+RoxygenNote: 7.1.0
