@@ -26,7 +26,11 @@ smart_as_sf.default <- function(
   x,
   ...
 ){
-  sf::st_as_sf(x, ...)
+  tryCatch(
+    sf::st_as_sf(x, ...),
+    error = function(e)
+      sf::st_as_sf(sf::st_as_sfc(x))  # for example for bbox
+  )
 }
 
 
