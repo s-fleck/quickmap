@@ -1,27 +1,22 @@
-#' Title
+#' Smartly convert an object to a simple feautres data frame
 #'
-#' @param x
-#' @param ...
+#' @param x any \R object
+#' @param ... ignored
 #'
-#' @return
+#' @return an [sf::sf] data.frame
 #' @export
 #'
 #' @examples
+#' smart_as_sf(data.frame(lat = c(1,2,3), longitude = c(3,4,5)))
 smart_as_sf <- function(x, ...){
   UseMethod("smart_as_sf")
 }
 
 
 
-#' Title
-#'
-#' @param x
-#' @param ...
-#'
-#' @return
+
+#' @rdname smart_as_sf
 #' @export
-#'
-#' @examples
 smart_as_sf.default <- function(
   x,
   ...
@@ -36,16 +31,8 @@ smart_as_sf.default <- function(
 
 
 
-
-#' Title
-#'
-#' @param x
-#' @param ...
-#'
-#' @return
+#' @rdname smart_as_sf
 #' @export
-#'
-#' @examples
 smart_as_sf.data.frame <- function(
   x,
   ...

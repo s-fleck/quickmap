@@ -28,10 +28,10 @@ coord_matrix <- function(x){
 #'
 #' `as_coord_matrix()` can smartly convert a range of \R objects to
 #' `coord_matrix`. If you are a package developer and want to add support
-#' for quickmap to your package without having to depend on the heavy \pkg{sf}
+#' for smartmap to your package without having to depend on the heavy \pkg{sf}
 #' package, it is enough to provide an `as_coord_matrix()` method.
 #'
-#' @param x quickmap currently supports coercion of the following data types:
+#' @param x smartmap currently supports coercion of the following data types:
 #'   * `matrix`: Either a matrix with named `latitude` and `longitude` columns
 #'     or an unnamed two column matrix containing longitude and lattiude
 #'     (in that order)

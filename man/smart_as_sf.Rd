@@ -2,16 +2,27 @@
 % Please edit documentation in R/smart_as_sf.R
 \name{smart_as_sf}
 \alias{smart_as_sf}
-\title{Title}
+\alias{smart_as_sf.default}
+\alias{smart_as_sf.data.frame}
+\title{Smartly convert an object to a simple feautres data frame}
 \usage{
 smart_as_sf(x, ...)
+
+\method{smart_as_sf}{default}(x, ...)
+
+\method{smart_as_sf}{data.frame}(x, ...)
 }
 \arguments{
-\item{...}{}
+\item{x}{any \R object}
+
+\item{...}{ignored}
 }
 \value{
-
+an \link[sf:sf]{sf::sf} data.frame
 }
 \description{
-Title
+Smartly convert an object to a simple feautres data frame
+}
+\examples{
+smart_as_sf(data.frame(lat = c(1,2,3), longitude = c(3,4,5)))
 }

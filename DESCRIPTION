@@ -1,7 +1,7 @@
 Type: Package
-Package: quickmap
-Title: Quickly Create Maps from R objects
-Version: 0.1.1.9000
+Package: smartmap
+Title: Smartly Create Maps from R objects
+Version: 0.0.2
 Authors@R: 
     person(given = "Stefan",
            family = "Fleck",

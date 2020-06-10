@@ -1,4 +1,4 @@
 library(testthat)
-library(quickmap)
+library(smartmap)
 
-test_check("quickmap")
+test_check("smartmap")

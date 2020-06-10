@@ -4,7 +4,7 @@ context("smart_as_sf")
 test_that("smart_as_sf works as expected for bbox objects", {
 
   x <- structure(
-    c(xmin = 12.7, ymin = 48.0, xmax = 17.5, ymax = 48.7),
+    c(xmin = 12.7, ymin = 48.0, xmax = 17.5, ymax = 48.5),
     class = "bbox",
     crs = structure(
       list(
@@ -13,6 +13,9 @@ test_that("smart_as_sf works as expected for bbox objects", {
       class = "crs")
     )
 
+  smap(x)
+
+
   expect_s3_class(smart_as_sf(x), "sf")
-  expect_s3_class(qmap(x), "leaflet")
+  expect_s3_class(smap(x), "leaflet")
 })

@@ -2,9 +2,9 @@
 #'
 #' Can be used to preview spatial \R objects
 #'
-#' @note `quickmap.default()` looks if an [sf::st_as_sf()],
-#'   [sf::st_as_sfc()] or [quickmap::as_coord_matrix()] method exists for `x` (in
-#'   that order). If you are a package developer and want to support quickmap
+#' @note `smartmap.default()` looks if an [sf::st_as_sf()],
+#'   [sf::st_as_sfc()] or [smartmap::as_coord_matrix()] method exists for `x` (in
+#'   that order). If you are a package developer and want to support smartmap
 #'   for a custom S3 class in your package, it is enough to provide one of these
 #'   methods.
 #'
@@ -34,30 +34,30 @@
 #' )
 #'
 #' \donttest{
-#'   qmap(wp)
-#'   qmap(c(16.419684, 48.186065))
+#'   smap(wp)
+#'   smap(c(16.419684, 48.186065))
 #' }
-qmap <- function(
+smap <- function(
   x,
   ...,
   tools = TRUE,
-  provider = getOption("qmap.providers", "OpenStreetMap")
+  provider = getOption("smap.providers", "OpenStreetMap")
 ){
   assert(is_scalar_bool(tools))
   assert(is.character(provider))
-  UseMethod("qmap")
+  UseMethod("smap")
 }
 
 
 
 
-#' @rdname qmap
+#' @rdname smap
 #' @export
-qmap.leaflet <- function(
+smap.leaflet <- function(
   x,
   ...,
   tools = TRUE,
-  provider = getOption("qmap.providers", "OpenStreetMap")
+  provider = getOption("smap.providers", "OpenStreetMap")
 ){
   if (isTRUE(tools)){
     x <-
@@ -92,13 +92,13 @@ qmap.leaflet <- function(
 
 
 
-#' @rdname qmap
+#' @rdname smap
 #' @export
-qmap.sf <- function(
+smap.sf <- function(
   x,
   ...,
   tools = TRUE,
-  provider = getOption("qmap.providers", "OpenStreetMap")
+  provider = getOption("smap.providers", "OpenStreetMap")
 ){
   gt <- unique(as.character(sf::st_geometry_type(x)))
 
@@ -120,21 +120,21 @@ qmap.sf <- function(
 
   leaflet::leaflet() %>%
     addFun(data = sf::st_transform(x, EPSG_WGS84)) %>%
-    qmap(tools = tools, provider = provider)
+    smap(tools = tools, provider = provider)
 }
 
 
 
 
-#' @rdname qmap
+#' @rdname smap
 #' @param labels an optional `character` vector of popup labels
 #' @export
-qmap.default <- function(
+smap.default <- function(
   x,
   labels = NULL,
   ...,
   tools = TRUE,
-  provider = getOption("qmap.providers", "OpenStreetMap")
+  provider = getOption("smap.providers", "OpenStreetMap")
 ){
   dd <- try(sf::st_as_sf(x), silent = TRUE)
 
@@ -150,22 +150,22 @@ qmap.default <- function(
     ))
   }
 
-  qmap(dd, tools = tools, provider = provider)
+  smap(dd, tools = tools, provider = provider)
 }
 
 
 
 
 #' @export
-qmap.data.frame <- function(
+smap.data.frame <- function(
   x,
   labels = NULL,
   ...,
   tools = TRUE,
-  provider = getOption("qmap.providers", "OpenStreetMap")
+  provider = getOption("smap.providers", "OpenStreetMap")
 ){
   if (any(vapply(x, inherits, logical(1), "sfc", USE.NAMES = FALSE))){
-    qmap(st_as_sf(x), tools = tools, provider = provider)
+    smap(st_as_sf(x), tools = tools, provider = provider)
 
   } else {
     NextMethod()
@@ -175,22 +175,22 @@ qmap.data.frame <- function(
 
 
 
-#' @rdname qmap
+#' @rdname smap
 #' @export
-qmap.sfc <- qmap.sf
+smap.sfc <- smap.sf
 
 
 
 
-#' @rdname qmap
+#' @rdname smap
 #' @export
-qmap.sfg <- function(
+smap.sfg <- function(
   x,
   ...,
   tools = TRUE,
-  provider = getOption("qmap.providers", "OpenStreetMap")
+  provider = getOption("smap.providers", "OpenStreetMap")
 ){
-  qmap(
+  smap(
     sf::st_sf(geometry = sf::st_sfc(x)),
     tools = tools, provider = provider
   )
@@ -199,38 +199,38 @@ qmap.sfg <- function(
 
 
 
-#' @rdname qmap
+#' @rdname smap
 #' @export
-qmap.matrix <- function(
+smap.matrix <- function(
   x,
   labels = NULL,
   ...,
   tools = TRUE,
-  provider = getOption("qmap.providers", "OpenStreetMap")
+  provider = getOption("smap.providers", "OpenStreetMap")
 ){
   x   <- as_coord_matrix(x)
   res <- st_as_sfc(x)
 
   if (!is.null(labels)){
-    qmap(res, tools = tools, provider = provider) %>%
+    smap(res, tools = tools, provider = provider) %>%
       leaflet::addPopups(lat = x[, "lat"], lng = x[, "lon"], popup = as.character(labels))
 
   } else {
-    qmap(res, tools = tools, provider = provider)
+    smap(res, tools = tools, provider = provider)
   }
 }
 
 
 
 
-#' @rdname qmap
+#' @rdname smap
 #' @export
-qmap.character <- function(
+smap.character <- function(
   x,
   labels = NULL,
   ...,
   tools = TRUE,
-  provider = getOption("qmap.providers", "OpenStreetMap")
+  provider = getOption("smap.providers", "OpenStreetMap")
 ){
   infile <- x
 
@@ -248,7 +248,7 @@ qmap.character <- function(
   }
 
   if (is_shpfile(infile))
-    qmap(sf::read_sf(infile))
+    smap(sf::read_sf(infile))
   else
     stop()
 }

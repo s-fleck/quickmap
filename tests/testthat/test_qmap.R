@@ -1,5 +1,5 @@
 
-test_that("qmap uses as_coord_matrix/st_as_sfc/st_as_sf in the correct order if available", {
+test_that("smap uses as_coord_matrix/st_as_sfc/st_as_sf in the correct order if available", {
   tdat <-
     list(matrix(
       c(48.186065, 16.419684,
@@ -10,21 +10,21 @@ test_that("qmap uses as_coord_matrix/st_as_sfc/st_as_sf in the correct order if 
       ncol = 2
     ))
   class(tdat) <- c("testclass")
-  expect_error(qmap(tdat), class = "objectNotSupportedError")
+  expect_error(smap(tdat), class = "objectNotSupportedError")
 
   as_coord_matrix.testclass <- function(x){
     message("coercing to coord_matrix")
     as_coord_matrix(x[[1]])
   }
   registerS3method("as_coord_matrix", "testclass", as_coord_matrix.testclass)
-  expect_message(expect_s3_class(qmap(tdat), "leaflet"), "coercing to coord_matrix")
+  expect_message(expect_s3_class(smap(tdat), "leaflet"), "coercing to coord_matrix")
 
   st_as_sfc.testclass <- function(x){
     message("coercing to sfc")
     st_as_sfc(as_coord_matrix(x)[[1]])
   }
   registerS3method("st_as_sfc", "testclass", st_as_sfc.testclass)
-  expect_message(expect_s3_class(qmap(tdat), "leaflet"), "coercing to sfc")
+  expect_message(expect_s3_class(smap(tdat), "leaflet"), "coercing to sfc")
 
   st_as_sf.testclass <- function(x){
     class(x) <- "matrix"
@@ -32,7 +32,7 @@ test_that("qmap uses as_coord_matrix/st_as_sfc/st_as_sf in the correct order if 
     st_as_sf(as_coord_matrix(x))
   }
   registerS3method("st_as_sf", "testclass", st_as_sf.testclass)
-  expect_message(expect_s3_class(qmap(tdat), "leaflet"), "coercing to sf")
+  expect_message(expect_s3_class(smap(tdat), "leaflet"), "coercing to sf")
 })
 
 
@@ -50,14 +50,14 @@ test_that("map_route creates a leaflet preview", {
       ncol = 2
     )
 
-  expect_s3_class(qmap(tdat), "leaflet")
+  expect_s3_class(smap(tdat), "leaflet")
   colnames(tdat) <- c("lon", "lat")
-  expect_s3_class(qmap(tdat), "leaflet")
+  expect_s3_class(smap(tdat), "leaflet")
 })
 
 
 
-test_that("qmap.bbox", {
+test_that("smap.bbox", {
   tdat <- structure(
     c(xmin = 13.093937, ymin = 48.206416, xmax = 16.373189, ymax = 48.247874),
     class = "bbox",
@@ -68,14 +68,14 @@ test_that("qmap.bbox", {
       class = "crs")
     )
 
-  expect_s3_class(qmap(tdat), "leaflet")
+  expect_s3_class(smap(tdat), "leaflet")
 })
 
 
 
 
 
-test_that("qmap.sfg", {
+test_that("smap.sfg", {
   tdat <-
     matrix(
       c(48.186065, 16.419684,
@@ -88,17 +88,17 @@ test_that("qmap.sfg", {
 
   tdat <- st_as_sf(as_coord_matrix(tdat))$geometry[[1]]
 
-  expect_s3_class(qmap(tdat), "leaflet")
+  expect_s3_class(smap(tdat), "leaflet")
 })
 
 
 
 
-test_that("qmap.character", {
+test_that("smap.character", {
   skip("takes too long")
 
   expect_s3_class(
-    qmap("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip"),
+    smap("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip"),
     "leaflet"
   )
 })

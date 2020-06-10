@@ -15,7 +15,7 @@ NULL
 
 
 .onLoad <- function(...) {
-  options(qmap.providers = c(
+  options(smap.providers = c(
     "CartoDB.Positron",
     "OpenStreetMap",
     "Esri.WorldImagery",

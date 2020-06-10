@@ -26,7 +26,7 @@ as_coord_matrix(x, ...)
 \method{as_coord_matrix}{data.frame}(x, ..., loncol = guess_loncol(x), latcol = guess_latcol(x))
 }
 \arguments{
-\item{x}{quickmap currently supports coercion of the following data types:
+\item{x}{smartmap currently supports coercion of the following data types:
 \itemize{
 \item \code{matrix}: Either a matrix with named \code{latitude} and \code{longitude} columns
 or an unnamed two column matrix containing longitude and lattiude
@@ -54,7 +54,7 @@ converting some \R objects to \code{\link[sf:sf]{sf::sf()}} objects.
 
 \code{as_coord_matrix()} can smartly convert a range of \R objects to
 \code{coord_matrix}. If you are a package developer and want to add support
-for quickmap to your package without having to depend on the heavy \pkg{sf}
+for smartmap to your package without having to depend on the heavy \pkg{sf}
 package, it is enough to provide an \code{as_coord_matrix()} method.
 }
 \seealso{
