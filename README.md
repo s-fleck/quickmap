@@ -30,14 +30,6 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("s-fleck/smartmap")
 ```
 
-## CRAN release
-
-A CRAN release is currently not planned. smartmap is pretty stable but
-it currently has few features to distinquish itself from
-[mapview](https://r-spatial.github.io/mapview/). If you like smartmap’s
-simple API and automatic input coercion and would like to see it on
-CRAN, please file an issue on the issue tracker.
-
 ## Example
 
 ``` r

@@ -100,26 +100,37 @@ smap.sf <- function(
   tools = TRUE,
   provider = getOption("smap.providers", "OpenStreetMap")
 ){
-  gt <- unique(as.character(sf::st_geometry_type(x)))
 
-  addFun <- switch(  # nolint
-    gt,
-   "MULTILINESTRING" = leaflet::addPolylines,
-   "LINESTRING"      = leaflet::addPolylines,
-   "POINT"           = leaflet::addCircleMarkers,
-   "MULTIPOINT"      = leaflet::addCircleMarkers,
-   "MULTIPOLYGON"    = leaflet::addPolygons,
-   "POLYGON"         = leaflet::addPolygons,
-   stop("'", gt, "' is not a valid geometry type")
-  )
+  # prep input
+    x <- sf::st_zm(x)
+    rem <- vapply(sf::st_geometry(x), sf::st_is_empty, logical(1))
 
-  if (is.na(sf::st_crs(x))){
-    warning("no CRS set for `", deparse(substitute(x)), "`: trying WGS84 (EPSG:4326).", call. = FALSE)
-    sf::st_crs(x) <- EPSG_WGS84
-  }
+    if (any(rem)){
+      warning("removed ", sum(rem), " rows with empty geometry", call. = FALSE)
+      x <- x[!rem, ]
+    }
+
+    if (is.na(sf::st_crs(x))){
+      warning("no CRS set for `", deparse(substitute(x)), "`: trying WGS84 (EPSG:4326)", call. = FALSE)
+      sf::st_crs(x) <- EPSG_WGS84
+    }
+
+  # build map
+    gt <- unique(as.character(sf::st_geometry_type(x)))
+
+    addFun <- switch(  # nolint
+      gt,
+     "MULTILINESTRING" = leaflet::addPolylines,
+     "LINESTRING"      = leaflet::addPolylines,
+     "POINT"           = leaflet::addCircleMarkers,
+     "MULTIPOINT"      = leaflet::addCircleMarkers,
+     "MULTIPOLYGON"    = leaflet::addPolygons,
+     "POLYGON"         = leaflet::addPolygons,
+     stop("'", gt, "' is not a geometry type supported by smartmap", call. = FALSE)
+    )
 
   leaflet::leaflet() %>%
-    addFun(data = sf::st_transform(x, EPSG_WGS84)) %>%
+    addFun(data = sf::st_transform(sf::st_zm(x), EPSG_WGS84)) %>%
     smap(tools = tools, provider = provider)
 }
 

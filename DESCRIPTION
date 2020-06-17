@@ -1,6 +1,6 @@
 Type: Package
 Package: smartmap
-Title: Smartly Create Maps from R objects
+Title: Smartly Create Maps from R Objects
 Version: 0.0.2
 Authors@R: 
     person(given = "Stefan",
@@ -9,7 +9,7 @@ Authors@R:
            email = "stefan.b.fleck@gmail.com",
            comment = c(ORCID = "0000-0003-3344-9851"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
-Description: Preview a wide range of common formats for spatial data as 
+Description: View a wide range of common formats for spatial data as 
   interactive leaflet maps.
 License: MIT + file LICENSE
 Imports:
