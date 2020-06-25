@@ -147,10 +147,7 @@ smap.default <- function(
   tools = TRUE,
   provider = getOption("smap.providers", "OpenStreetMap")
 ){
-  dd <- try(sf::st_as_sf(x), silent = TRUE)
-
-  if (is_try_error(dd))
-    dd <- try(st_as_sfc(x), silent = TRUE)
+  dd <- try(smart_as_sf(x), silent = TRUE)
 
   if (is_try_error(dd))
     dd <- try(st_as_sf(as_coord_matrix(x)), silent = TRUE)
