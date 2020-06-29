@@ -86,9 +86,9 @@ test_that("smap.sfg", {
       ncol = 2
     )
 
+  colnames(tdat) <- c("lat", "lon")
   tdat <- st_as_sf(as_coord_matrix(tdat))$geometry[[1]]
-
-  expect_s3_class(smap(tdat), "leaflet")
+  expect_warning(expect_s3_class(smap(tdat), "leaflet"))
 })
 
 

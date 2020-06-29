@@ -26,10 +26,10 @@ knitr::opts_chunk$set(
 **smartmap** is a package for previewing spatial data as leaflet maps in R. It 
 is designed primarily for interactive use and produces nice maps with minimal 
 setup required. In contrast to other similar packages,
-smartmap does not require an `sf` or `sp` object as input, but just works with
-normal `data.frames` or `matrices` that have latitude and longitude columns.
+smartmap does not require an `sf` or `sp` object as input, but *just works* with
+normal `data.frames` or `matrices` that have longitude and latitude columns.
 See [the function reference](https://s-fleck.github.io/smartmap/) for more 
-infos.
+info.
 
 
 

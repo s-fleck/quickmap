@@ -28,20 +28,20 @@ as_coord_matrix(x, ...)
 \arguments{
 \item{x}{smartmap currently supports coercion of the following data types:
 \itemize{
-\item \code{matrix}: Either a matrix with named \code{latitude} and \code{longitude} columns
-or an unnamed two column matrix containing longitude and lattiude
+\item \code{matrix}: Either a matrix with named \code{longitude} and \code{latitude} columns
+or an unnamed two column matrix containing longitude and latitude
 (in that order)
-\item a \code{data.frame} mit named \code{latitude} and \code{longitude} columns
+\item a \code{data.frame} with named \code{longitude} and \code{latitude} columns
 \item an \link[sf:sfc]{sf::sfc_POINT} object
-\item a named or unmmaned \code{numeric} vecot of length 2 containign a single
+\item a named or unnamed \code{numeric} vector of length 2 containing a single
 longitude-latitude coordinate pair
 }}
 
 \item{...}{passed on to methods}
 
 \item{loncol, latcol}{\code{character} scalars. Names of the columns of
-\code{x} containing longitude and lattiude. The default is to try guessing the
-appropriate columns.}
+\code{x} containing longitude and latitude. The default trying guessing the
+columns.}
 }
 \value{
 \code{as_coord_matrix()} returns a \code{coord_matrix} object: A numeric

@@ -9,3 +9,4 @@
 ^pkgdown$
 ^Jenkinsfile$
 ^jenkins.yaml$
+^cran-comments\.md$

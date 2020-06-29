@@ -4,7 +4,7 @@
 \alias{smart_as_sf}
 \alias{smart_as_sf.default}
 \alias{smart_as_sf.data.frame}
-\title{Smartly convert an object to a simple feautres data frame}
+\title{Smartly convert an object to a simple features data frame}
 \usage{
 smart_as_sf(x, ...)
 
@@ -21,8 +21,10 @@ smart_as_sf(x, ...)
 an \link[sf:sf]{sf::sf} data.frame
 }
 \description{
-Smartly convert an object to a simple feautres data frame
+Converts \R objects to \link[sf:sf]{sf::sf} objects, but supports a wider
+range of input data than \link[sf:st_as_sf]{sf::st_as_sf}.
 }
 \examples{
 smart_as_sf(data.frame(lat = c(1,2,3), longitude = c(3,4,5)))
+smart_as_sf(c(1, 2))
 }

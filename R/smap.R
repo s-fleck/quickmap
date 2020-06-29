@@ -111,7 +111,7 @@ smap.sf <- function(
     }
 
     if (is.na(sf::st_crs(x))){
-      warning("no CRS set for `", deparse(substitute(x)), "`: trying WGS84 (EPSG:4326)", call. = FALSE)
+      warning("no CRS set for `", preview_object(x), "`: trying WGS84 (EPSG:4326)", call. = FALSE)
       sf::st_crs(x) <- EPSG_WGS84
     }
 

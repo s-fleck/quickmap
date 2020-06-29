@@ -1,5 +1,4 @@
-smartmap (dev version)
+smartmap 0.1.0
 
 
-* added `smart_as_sf()` for smartly converting data.frames with lat/lon columns
-  to sf objects.
+* first CRAN release

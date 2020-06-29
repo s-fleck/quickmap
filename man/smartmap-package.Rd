@@ -4,9 +4,9 @@
 \name{smartmap-package}
 \alias{smartmap}
 \alias{smartmap-package}
-\title{smartmap: Smartly Create Maps from R objects}
+\title{smartmap: Smartly Create Maps from R Objects}
 \description{
-Preview a wide range of common formats for spatial data as 
+View a wide range of common formats for spatial data as 
   interactive leaflet maps.
 }
 \author{

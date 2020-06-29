@@ -32,12 +32,12 @@ coord_matrix <- function(x){
 #' package, it is enough to provide an `as_coord_matrix()` method.
 #'
 #' @param x smartmap currently supports coercion of the following data types:
-#'   * `matrix`: Either a matrix with named `latitude` and `longitude` columns
-#'     or an unnamed two column matrix containing longitude and lattiude
+#'   * `matrix`: Either a matrix with named `longitude` and `latitude` columns
+#'     or an unnamed two column matrix containing longitude and latitude
 #'     (in that order)
-#'   * a `data.frame` mit named `latitude` and `longitude` columns
+#'   * a `data.frame` with named `longitude` and `latitude` columns
 #'   * an [sf::sfc_POINT][sf::sfc] object
-#'   * a named or unmmaned `numeric` vecot of length 2 containign a single
+#'   * a named or unnamed `numeric` vector of length 2 containing a single
 #'     longitude-latitude coordinate pair
 #'
 #' @return `as_coord_matrix()` returns a `coord_matrix` object: A numeric
@@ -126,8 +126,8 @@ as_coord_matrix.sfc_POINT <- function(x, ...){
 
 #' @rdname as_coord_matrix
 #' @param loncol,latcol `character` scalars. Names of the columns of
-#'   `x` containing longitude and lattiude. The default is to try guessing the
-#'   appropriate columns.
+#'   `x` containing longitude and latitude. The default trying guessing the
+#'   columns.
 #' @export
 as_coord_matrix.matrix <- function(
   x,
@@ -238,7 +238,7 @@ guess_loncol <- function(x){
   if (!length(cols))
     return(1L)
 
-  res <- which(tolower(cols) %in%  c("lon", "lng", "long", "longitude"))
+  res <- which(tolower(cols) %in%  c("lon", "lng", "long", "longitude", "x"))
 
   standardize_colpos(res, x, "longitude")
 }
@@ -253,7 +253,7 @@ guess_latcol <- function(x){
   if (!length(cols))
     return(2L)
 
-  res <- which(tolower(cols) %in% c("lat", "latitude"))
+  res <- which(tolower(cols) %in% c("lat", "latitude", "y"))
   standardize_colpos(res, x, "latitude")
 }
 
