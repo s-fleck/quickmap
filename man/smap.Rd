@@ -103,7 +103,7 @@ Can be used to preview spatial \R objects
 }
 \note{
 \code{smartmap.default()} looks if an \code{\link[sf:st_as_sf]{sf::st_as_sf()}},
-\code{\link[sf:st_as_sfc]{sf::st_as_sfc()}} or \code{\link[smartmap:as_coord_matrix]{smartmap::as_coord_matrix()}} method exists for \code{x} (in
+\code{\link[sf:st_as_sfc]{sf::st_as_sfc()}} or \code{\link[=as_coord_matrix]{as_coord_matrix()}} method exists for \code{x} (in
 that order). If you are a package developer and want to support smartmap
 for a custom S3 class in your package, it is enough to provide one of these
 methods.

@@ -6,8 +6,7 @@
 \alias{smartmap-package}
 \title{smartmap: Smartly Create Maps from R Objects}
 \description{
-View a wide range of common formats for spatial data as 
-  interactive leaflet maps.
+Preview spatial data as interactive 'leaflet' maps.
 }
 \author{
 \strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com} (\href{https://orcid.org/0000-0003-3344-9851}{ORCID})

@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.org/s-fleck/smartmap.svg?branch=master)](https://travis-ci.org/s-fleck/smartmap)
+status](https://travis-ci.org/s-fleck/smartmap.svg?branch=master)](https://travis-ci.com/s-fleck/smartmap)
 [![Codecov test
 coverage](https://codecov.io/gh/s-fleck/smartmap/branch/master/graph/badge.svg)](https://codecov.io/gh/s-fleck/smartmap?branch=master)
 [![Lifecycle:

@@ -9,8 +9,7 @@ Authors@R:
            email = "stefan.b.fleck@gmail.com",
            comment = c(ORCID = "0000-0003-3344-9851"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
-Description: View a wide range of common formats for spatial data as 
-  interactive leaflet maps.
+Description: Preview spatial data as interactive 'leaflet' maps.
 License: MIT + file LICENSE
 Imports:
     leaflet,
@@ -25,4 +24,4 @@ Depends:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
