@@ -4,6 +4,7 @@
 \alias{smart_as_sf}
 \alias{smart_as_sf.default}
 \alias{smart_as_sf.data.frame}
+\alias{smart_as_sf.character}
 \title{Smartly convert an object to a simple features data frame}
 \usage{
 smart_as_sf(x, ...)
@@ -11,9 +12,21 @@ smart_as_sf(x, ...)
 \method{smart_as_sf}{default}(x, ...)
 
 \method{smart_as_sf}{data.frame}(x, ...)
+
+\method{smart_as_sf}{character}(x, ...)
 }
 \arguments{
-\item{x}{any \R object}
+\item{x}{any of the following:
+\itemize{
+\item a \code{matrix}: Either a matrix with named \code{longitude} and \code{latitude} columns
+or an unnamed two column matrix containing longitude and latitude
+(in that order)
+\item a \code{data.frame} with named \code{longitude} and \code{latitude} columns
+\item an \link[sf:sfc]{sf::sfc_POINT} object
+\item a named or unnamed \code{numeric} vector of length 2 containing a single
+longitude-latitude coordinate pair
+\item a \code{character} scalar path or URL to a shapefile or zipped shapefile
+}}
 
 \item{...}{ignored}
 }
@@ -23,6 +36,13 @@ an \link[sf:sf]{sf::sf} data.frame
 \description{
 Converts \R objects to \link[sf:sf]{sf::sf} objects, but supports a wider
 range of input data than \link[sf:st_as_sf]{sf::st_as_sf}.
+}
+\note{
+\code{smart_as_sf.default()} looks if an \code{\link[sf:st_as_sf]{sf::st_as_sf()}},
+\code{\link[sf:st_as_sfc]{sf::st_as_sfc()}} or \code{\link[=as_coord_matrix]{as_coord_matrix()}} method exists for \code{x} (in
+that order). If you are a package developer and want to support smartmap
+for a custom S3 class in your package, it is enough to provide one of these
+methods.
 }
 \examples{
 smart_as_sf(data.frame(lat = c(1,2,3), longitude = c(3,4,5)))

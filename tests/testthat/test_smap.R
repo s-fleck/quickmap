@@ -95,7 +95,7 @@ test_that("smap.sfg", {
 
 
 test_that("smap.character", {
-  skip("takes too long")
+  skip_on_cran()
 
   expect_s3_class(
     smap("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip"),

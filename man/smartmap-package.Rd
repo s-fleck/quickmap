@@ -6,7 +6,14 @@
 \alias{smartmap-package}
 \title{smartmap: Smartly Create Maps from R Objects}
 \description{
-Preview spatial data as interactive 'leaflet' maps.
+Preview spatial data as 'leaflet' maps with minimal
+  effort. smartmap is optimized for interactive use and distinguishes itself 
+  from similar packages because it does not need real spatial ('sp' or 'sf')
+  objects an input; instead, it tries to automatically coerce everything that 
+  looks like spatial data to sf objects or leaflet maps. It - for example -  
+  supports direct mapping of: a vector containing a single coordinate pair,
+  a two column matrix, a data.frame with longitude and latitude columns, or
+  the path or URL to a (possibly compressed) 'shapefile'.
 }
 \author{
 \strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com} (\href{https://orcid.org/0000-0003-3344-9851}{ORCID})

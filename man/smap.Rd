@@ -8,7 +8,6 @@
 \alias{smap.sfc}
 \alias{smap.sfg}
 \alias{smap.matrix}
-\alias{smap.character}
 \title{View spatial objects as interactive leaflet maps}
 \usage{
 smap(
@@ -61,25 +60,19 @@ smap(
   tools = TRUE,
   provider = getOption("smap.providers", "OpenStreetMap")
 )
-
-\method{smap}{character}(
-  x,
-  labels = NULL,
-  ...,
-  tools = TRUE,
-  provider = getOption("smap.providers", "OpenStreetMap")
-)
 }
 \arguments{
-\item{x}{smartmap currently supports coercion of the following data types:
+\item{x}{any input supported by \code{\link[=smart_as_sf]{smart_as_sf()}} or a \link[leaflet:leaflet]{leaflet} map
 \itemize{
-\item \code{matrix}: Either a matrix with named \code{longitude} and \code{latitude} columns
+\item a \code{matrix}: Either a matrix with named \code{longitude} and \code{latitude} columns
 or an unnamed two column matrix containing longitude and latitude
 (in that order)
 \item a \code{data.frame} with named \code{longitude} and \code{latitude} columns
 \item an \link[sf:sfc]{sf::sfc_POINT} object
 \item a named or unnamed \code{numeric} vector of length 2 containing a single
 longitude-latitude coordinate pair
+\item a \code{character} scalar path or URL to a shapefile or zipped shapefile
+\item a \code{leaflet} map
 }}
 
 \item{...}{passed on to methods.}
@@ -101,13 +94,6 @@ a \link[leaflet:leaflet]{leaflet::leaflet} object
 \description{
 Can be used to preview spatial \R objects
 }
-\note{
-\code{smartmap.default()} looks if an \code{\link[sf:st_as_sf]{sf::st_as_sf()}},
-\code{\link[sf:st_as_sfc]{sf::st_as_sfc()}} or \code{\link[=as_coord_matrix]{as_coord_matrix()}} method exists for \code{x} (in
-that order). If you are a package developer and want to support smartmap
-for a custom S3 class in your package, it is enough to provide one of these
-methods.
-}
 \examples{
 wp <- matrix(
   c(16.419684, 48.186065,
@@ -118,7 +104,7 @@ wp <- matrix(
 )
 
 \donttest{
-  smap(wp)
-  smap(c(16.419684, 48.186065))
+smap(wp)
+smap(c(16.419684, 48.186065))
 }
 }

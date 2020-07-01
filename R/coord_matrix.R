@@ -31,14 +31,7 @@ coord_matrix <- function(x){
 #' for smartmap to your package without having to depend on the heavy \pkg{sf}
 #' package, it is enough to provide an `as_coord_matrix()` method.
 #'
-#' @param x smartmap currently supports coercion of the following data types:
-#'   * `matrix`: Either a matrix with named `longitude` and `latitude` columns
-#'     or an unnamed two column matrix containing longitude and latitude
-#'     (in that order)
-#'   * a `data.frame` with named `longitude` and `latitude` columns
-#'   * an [sf::sfc_POINT][sf::sfc] object
-#'   * a named or unnamed `numeric` vector of length 2 containing a single
-#'     longitude-latitude coordinate pair
+#' @inheritParams smart_as_sf
 #'
 #' @return `as_coord_matrix()` returns a `coord_matrix` object: A numeric
 #'   `matrix` with the columns `"lon"`and `"lat"` (in that order)
@@ -65,7 +58,7 @@ as_coord_matrix.default <- function(
   ...
 ){
   tryCatch(
-    as_coord_matrix(st_as_sf(x)),
+    as_coord_matrix(smart_as_sf(x)),
     error = function(e) stop(objectNotSupportedError(
         message = paste("don't know how convert objects of type", class_fmt(x), "to coord_matrix")
     ))

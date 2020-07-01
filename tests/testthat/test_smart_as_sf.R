@@ -13,9 +13,24 @@ test_that("smart_as_sf works as expected for bbox objects", {
       class = "crs")
     )
 
-  smap(x)
-
-
   expect_s3_class(smart_as_sf(x), "sf")
   expect_s3_class(smap(x), "leaflet")
+})
+
+
+
+
+test_that("smart_as_sf.character works", {
+  skip_on_cran()
+  tf  <- tempfile(fileext = ".zip")
+  tf2 <- tempfile()
+  on.exit(unlink(c(tf, tf2)))
+  download.file(
+    "https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
+    destfile = tf
+  )
+
+  expect_s3_class(as_coord_matrix(tf), "coord_matrix")
+  expect_s3_class(smart_as_sf(tf), "sf")
+  expect_error(smart_as_sf(tf2), class = "value_error")
 })

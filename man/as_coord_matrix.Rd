@@ -26,15 +26,16 @@ as_coord_matrix(x, ...)
 \method{as_coord_matrix}{data.frame}(x, ..., loncol = guess_loncol(x), latcol = guess_latcol(x))
 }
 \arguments{
-\item{x}{smartmap currently supports coercion of the following data types:
+\item{x}{any of the following:
 \itemize{
-\item \code{matrix}: Either a matrix with named \code{longitude} and \code{latitude} columns
+\item a \code{matrix}: Either a matrix with named \code{longitude} and \code{latitude} columns
 or an unnamed two column matrix containing longitude and latitude
 (in that order)
 \item a \code{data.frame} with named \code{longitude} and \code{latitude} columns
 \item an \link[sf:sfc]{sf::sfc_POINT} object
 \item a named or unnamed \code{numeric} vector of length 2 containing a single
 longitude-latitude coordinate pair
+\item a \code{character} scalar path or URL to a shapefile or zipped shapefile
 }}
 
 \item{...}{passed on to methods}

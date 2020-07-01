@@ -1,4 +1,4 @@
-smartmap 0.1.0
+smartmap 0.1.1
 
 
 * first CRAN release
