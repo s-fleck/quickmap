@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">smartmap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -170,15 +170,6 @@
   <span class='no'>...</span>,
   <span class='kw'>tools</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>provider</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span>)
-)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>smap</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>tools</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>provider</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -186,14 +177,16 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>smartmap currently supports coercion of the following data types:</p><ul>
-<li><p><code>matrix</code>: Either a matrix with named <code>longitude</code> and <code>latitude</code> columns
+      <td><p>any input supported by <code><a href='smart_as_sf.html'>smart_as_sf()</a></code> or a <a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a> map</p><ul>
+<li><p>a <code>matrix</code>: Either a matrix with named <code>longitude</code> and <code>latitude</code> columns
 or an unnamed two column matrix containing longitude and latitude
 (in that order)</p></li>
 <li><p>a <code>data.frame</code> with named <code>longitude</code> and <code>latitude</code> columns</p></li>
 <li><p>an <a href='https://rdrr.io/pkg/sf/man/sfc.html'>sf::sfc_POINT</a> object</p></li>
 <li><p>a named or unnamed <code>numeric</code> vector of length 2 containing a single
 longitude-latitude coordinate pair</p></li>
+<li><p>a <code>character</code> scalar path or URL to a shapefile or zipped shapefile</p></li>
+<li><p>a <code>leaflet</code> map</p></li>
 </ul></td>
     </tr>
     <tr>
@@ -222,13 +215,6 @@ leaflet map, if <code>tools == FALSE</code> only the first provider will be used
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a <a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet::leaflet</a> object</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p><code>smartmap.default()</code> looks if an <code><a href='https://rdrr.io/pkg/sf/man/st_as_sf.html'>sf::st_as_sf()</a></code>,
-<code><a href='https://rdrr.io/pkg/sf/man/st_as_sfc.html'>sf::st_as_sfc()</a></code> or <code><a href='as_coord_matrix.html'>as_coord_matrix()</a></code> method exists for <code>x</code> (in
-that order). If you are a package developer and want to support smartmap
-for a custom S3 class in your package, it is enough to provide one of these
-methods.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(
@@ -240,8 +226,8 @@ methods.</p>
 )
 
 <span class='co'># \donttest{</span>
-  <span class='fu'>smap</span>(<span class='no'>wp</span>)
-  <span class='fu'>smap</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>16.419684</span>, <span class='fl'>48.186065</span>))
+<span class='fu'>smap</span>(<span class='no'>wp</span>)
+<span class='fu'>smap</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>16.419684</span>, <span class='fl'>48.186065</span>))
 <span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
