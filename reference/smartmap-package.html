@@ -41,11 +41,13 @@
 
 <meta property="og:title" content="smartmap: Smartly Create Maps from R Objects — smartmap-package" />
 <meta property="og:description" content="Preview spatial data as 'leaflet' maps with minimal
-  effort. smartmap is optimized for interactive use and provides the function 
-  smap() which can directly create a map from - for example - a data.frame with 
-  longitude and latitude columns, a two column matrix, or the path to a zipped 
-  shapefile on the web. The function smart_as_sf() provides the same heuristics
-  for converting a wide range of inputs to 'simple features' data.frames." />
+  effort. smartmap is optimized for interactive use and distinguishes itself 
+  from similar packages because it does not need real spatial ('sp' or 'sf')
+  objects an input; instead, it tries to automatically coerce everything that 
+  looks like spatial data to sf objects or leaflet maps. It - for example -  
+  supports direct mapping of: a vector containing a single coordinate pair,
+  a two column matrix, a data.frame with longitude and latitude columns, or
+  the path or URL to a (possibly compressed) 'shapefile'." />
 
 
 
@@ -118,11 +120,13 @@
 
     <div class="ref-description">
     <p>Preview spatial data as 'leaflet' maps with minimal
-  effort. smartmap is optimized for interactive use and provides the function 
-  smap() which can directly create a map from - for example - a data.frame with 
-  longitude and latitude columns, a two column matrix, or the path to a zipped 
-  shapefile on the web. The function smart_as_sf() provides the same heuristics
-  for converting a wide range of inputs to 'simple features' data.frames.</p>
+  effort. smartmap is optimized for interactive use and distinguishes itself 
+  from similar packages because it does not need real spatial ('sp' or 'sf')
+  objects an input; instead, it tries to automatically coerce everything that 
+  looks like spatial data to sf objects or leaflet maps. It - for example -  
+  supports direct mapping of: a vector containing a single coordinate pair,
+  a two column matrix, a data.frame with longitude and latitude columns, or
+  the path or URL to a (possibly compressed) 'shapefile'.</p>
     </div>
 
 
