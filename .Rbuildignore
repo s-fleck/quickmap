@@ -10,3 +10,4 @@
 ^Jenkinsfile$
 ^jenkins.yaml$
 ^cran-comments\.md$
+^CRAN-RELEASE$
