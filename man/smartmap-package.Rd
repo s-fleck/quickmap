@@ -15,6 +15,14 @@ Preview spatial data as 'leaflet' maps with minimal
   a two column matrix, a data.frame with longitude and latitude columns, or
   the path or URL to a (possibly compressed) 'shapefile'.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/s-fleck/smartmap}
+  \item Report bugs at \url{https://github.com/s-fleck/smartmap/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com} (\href{https://orcid.org/0000-0003-3344-9851}{ORCID})
 

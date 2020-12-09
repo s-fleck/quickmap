@@ -28,6 +28,8 @@ Suggests:
     testthat
 Depends:
   R (>= 3.6.0)
+URL: https://github.com/s-fleck/smartmap
+BugReports: https://github.com/s-fleck/smartmap/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

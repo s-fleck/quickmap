@@ -23,11 +23,17 @@ reference](https://s-fleck.github.io/smartmap/) for more info.
 
 ## Installation
 
-And the development version from [GitHub](https://github.com/) with:
+You can install smartmap from CRAN:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("s-fleck/smartmap")
+install.packages("smartmap")
+```
+
+or get the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("s-fleck/smartmap")
 ```
 
 ## Example
