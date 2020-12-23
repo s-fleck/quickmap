@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,7 +94,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/s-fleck/smartmap/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -120,62 +120,62 @@
     <p>Can be used to preview spatial <span style="R">R</span> objects</p>
     </div>
 
-    <pre class="usage"><span class='fu'>smap</span>(
-  <span class='no'>x</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>tools</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>provider</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span>)
-)
+    <pre class="usage"><span class='fu'>smap</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>...</span>,
+  tools <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  provider <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for leaflet</span>
-<span class='fu'>smap</span>(
-  <span class='no'>x</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>tools</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>provider</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span>)
-)
+<span class='fu'>smap</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>...</span>,
+  tools <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  provider <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for sf</span>
-<span class='fu'>smap</span>(
-  <span class='no'>x</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>tools</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>provider</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span>)
-)
+<span class='fu'>smap</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>...</span>,
+  tools <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  provider <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>smap</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>tools</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>provider</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span>)
-)
+<span class='fu'>smap</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  labels <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>,
+  tools <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  provider <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for sfc</span>
-<span class='fu'>smap</span>(
-  <span class='no'>x</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>tools</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>provider</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span>)
-)
+<span class='fu'>smap</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>...</span>,
+  tools <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  provider <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for sfg</span>
-<span class='fu'>smap</span>(
-  <span class='no'>x</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>tools</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>provider</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span>)
-)
+<span class='fu'>smap</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>...</span>,
+  tools <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  provider <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>smap</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>tools</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>provider</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span>)
-)</pre>
+<span class='fu'>smap</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  labels <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>,
+  tools <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  provider <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"smap.providers"</span>, <span class='st'>"OpenStreetMap"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,7 +187,7 @@
 or an unnamed two column matrix containing longitude and latitude
 (in that order)</p></li>
 <li><p>a <code>data.frame</code> with named <code>longitude</code> and <code>latitude</code> columns</p></li>
-<li><p>an <a href='https://rdrr.io/pkg/sf/man/sfc.html'>sf::sfc_POINT</a> object</p></li>
+<li><p>an <a href='https://r-spatial.github.io/sf/reference/sfc.html'>sf::sfc_POINT</a> object</p></li>
 <li><p>a named or unnamed <code>numeric</code> vector of length 2 containing a single
 longitude-latitude coordinate pair</p></li>
 <li><p>a <code>character</code> scalar path or URL to a shapefile or zipped shapefile</p></li>
@@ -222,18 +222,19 @@ leaflet map, if <code>tools == FALSE</code> only the first provider will be used
     <p>a <a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet::leaflet</a> object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>wp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>16.419684</span>, <span class='fl'>48.186065</span>,
+    <pre class="examples"><div class='input'><span class='va'>wp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>16.419684</span>, <span class='fl'>48.186065</span>,
     <span class='fl'>16.373894</span>, <span class='fl'>48.207853</span>,
-    <span class='fl'>16.285887</span>, <span class='fl'>48.083053</span>),
-  <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span>
-)
+    <span class='fl'>16.285887</span>, <span class='fl'>48.083053</span><span class='op'>)</span>,
+  byrow <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  ncol <span class='op'>=</span> <span class='fl'>2</span>
+<span class='op'>)</span>
 
 <span class='co'># \donttest{</span>
-<span class='fu'>smap</span>(<span class='no'>wp</span>)
-<span class='fu'>smap</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>16.419684</span>, <span class='fl'>48.186065</span>))
-<span class='co'># }</span></div></pre>
+<span class='fu'>smap</span><span class='op'>(</span><span class='va'>wp</span><span class='op'>)</span>
+<span class='fu'>smap</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>16.419684</span>, <span class='fl'>48.186065</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -249,7 +250,7 @@ leaflet map, if <code>tools == FALSE</code> only the first provider will be used
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

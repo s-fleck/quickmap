@@ -86,7 +86,7 @@ package, it is enough to provide an as_coord_matrix() method." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,7 +100,7 @@ package, it is enough to provide an as_coord_matrix() method." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/s-fleck/smartmap/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -125,32 +125,32 @@ package, it is enough to provide an as_coord_matrix() method." />
     <div class="ref-description">
     <p>A <code>coord_matrix</code> is a <code>matrix</code> with two columns named <code>"lon"</code> and <code>"lat"</code> to
 represent spatial point data. They are used as an intermediary when
-converting some <span style="R">R</span> objects to <code><a href='https://rdrr.io/pkg/sf/man/sf.html'>sf::sf()</a></code> objects.</p>
+converting some <span style="R">R</span> objects to <code><a href='https://r-spatial.github.io/sf/reference/sf.html'>sf::sf()</a></code> objects.</p>
 <p><code>as_coord_matrix()</code> can smartly convert a range of <span style="R">R</span> objects to
 <code>coord_matrix</code>. If you are a package developer and want to add support
 for smartmap to your package without having to depend on the heavy <span class="pkg">sf</span>
 package, it is enough to provide an <code>as_coord_matrix()</code> method.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_coord_matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>as_coord_matrix</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>as_coord_matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>as_coord_matrix</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for numeric</span>
-<span class='fu'>as_coord_matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>as_coord_matrix</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for sf</span>
-<span class='fu'>as_coord_matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>as_coord_matrix</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for sfc_POINT</span>
-<span class='fu'>as_coord_matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>as_coord_matrix</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>as_coord_matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>loncol</span> <span class='kw'>=</span> <span class='fu'>guess_loncol</span>(<span class='no'>x</span>), <span class='kw'>latcol</span> <span class='kw'>=</span> <span class='fu'>guess_latcol</span>(<span class='no'>x</span>))
+<span class='fu'>as_coord_matrix</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, loncol <span class='op'>=</span> <span class='fu'>guess_loncol</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, latcol <span class='op'>=</span> <span class='fu'>guess_latcol</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>as_coord_matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>loncol</span> <span class='kw'>=</span> <span class='fu'>guess_loncol</span>(<span class='no'>x</span>), <span class='kw'>latcol</span> <span class='kw'>=</span> <span class='fu'>guess_latcol</span>(<span class='no'>x</span>))</pre>
+<span class='fu'>as_coord_matrix</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, loncol <span class='op'>=</span> <span class='fu'>guess_loncol</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, latcol <span class='op'>=</span> <span class='fu'>guess_latcol</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,7 +162,7 @@ package, it is enough to provide an <code>as_coord_matrix()</code> method.</p>
 or an unnamed two column matrix containing longitude and latitude
 (in that order)</p></li>
 <li><p>a <code>data.frame</code> with named <code>longitude</code> and <code>latitude</code> columns</p></li>
-<li><p>an <a href='https://rdrr.io/pkg/sf/man/sfc.html'>sf::sfc_POINT</a> object</p></li>
+<li><p>an <a href='https://r-spatial.github.io/sf/reference/sfc.html'>sf::sfc_POINT</a> object</p></li>
 <li><p>a named or unnamed <code>numeric</code> vector of length 2 containing a single
 longitude-latitude coordinate pair</p></li>
 <li><p>a <code>character</code> scalar path or URL to a shapefile or zipped shapefile</p></li>
@@ -203,7 +203,7 @@ columns.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
