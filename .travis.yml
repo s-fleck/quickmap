@@ -3,11 +3,15 @@
 language: R
 sudo: required
 cache: packages
+addons:
+  apt:
+    packages:
+      - libharfbuzz-dev # for pkgdown
+      - libfribidi-dev
 before_install:
   - sudo add-apt-repository ppa:ubuntugis/ppa --yes
   - sudo apt-get --yes --force-yes update -qq
   - sudo apt-get install --yes libudunits2-dev libproj-dev libgeos-dev libgdal-dev
-before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 matrix:
   include:
   - r: devel
@@ -19,4 +23,4 @@ matrix:
       provider: script
       script: Rscript -e 'pkgdown::deploy_site_github(ssh_id = Sys.getenv("TRAVIS_DEPLOY_KEY", ""))'
       skip_cleanup: true
-  - r: 3.6
+  - r: oldrel
