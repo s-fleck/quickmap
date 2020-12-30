@@ -305,7 +305,7 @@ multipleCandidateColumnsFoundWarning <- function(obj, pos, coltype){
   warningCondition(
     paste(
       "Multiple possible latitude columns found: ",
-      commalist(columns), ". Using ", backtick(columns[[1]]), "`."
+      comma(columns), ". Using ", backtick(columns[[1]]), "`."
     ),
     class = "multipleCandidateColumnsFoundWarning"
   )

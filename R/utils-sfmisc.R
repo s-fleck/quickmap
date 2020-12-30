@@ -1,4 +1,4 @@
-# sfmisc utils 1.0.0
+# sfmisc utils 1.0.0.9034
 
 
 
@@ -43,8 +43,8 @@ ptrunc <- function(
 
 
 
-fmt_class <- function(x){
-  paste0("<", paste(x, collapse = "/"), ">")
+fmt_class <- function(x, open = "<", close = ">"){
+  paste0(open, paste(x, collapse = "/"), close)
 }
 
 
@@ -131,16 +131,19 @@ assert <- function(
 
 
 assert_namespace <- function(...){
-  res <- vapply(c(...), requireNamespace, logical(1), quietly = TRUE)
+  pkgs <- c(...)
+
+  res <- vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)
   if (all(res)){
     return(invisible(TRUE))
 
   } else {
-    pkgs <- c(...)
-    if (identical(length(pkgs), 1L)){
+    miss <- pkgs[!res]
+
+    if (identical(length(miss), 1L)){
       msg <- sprintf(paste(
         "This function requires the package '%s'. You can install it with",
-        '`install.packages("%s")`.'), pkgs, pkgs
+        '`install.packages("%s")`.'), miss, miss
       )
     } else {
       msg <- sprintf(
@@ -148,13 +151,13 @@ assert_namespace <- function(...){
           "This function requires the packages %s. You can install them with",
           "`install.packages(%s)`."
         ),
-        paste(names(res)[!res], collapse = ", "),
-        deparse(names(res))
+        paste(miss, collapse = ", "),
+        paste0("c(", paste(paste0('\"', miss, '\"'), collapse = ", "), ")")
       )
     }
   }
 
-  stop(msg)
+  stop(msg, call. = FALSE)
 }
 
 
@@ -687,6 +690,24 @@ preview_object <- function(
   quotes   = c("`", "`"),
   dots = ".."
 ){
+  if (is.function(x)){
+    fmls <- names(formals(x))
+    len_fmls <- length(fmls)
+
+    if (len_fmls > 4){
+      fmls <- fmls[1:4]
+      fmls_fmt <- paste(fmls, collapse = ", ")
+      fmls_fmt <- paste0(fmls_fmt, ", +", len_fmls - length(fmls), "")
+    } else {
+      fmls_fmt <- paste(fmls, collapse = ", ")
+    }
+    return(fmt_class(paste(
+      fmt_class(class(x), open = "", close = ""), "(", fmls_fmt, ")",
+      sep = ""
+    )))
+  }
+
+
   if (!is.atomic(x))
     return(class_fmt(x))
 
@@ -701,6 +722,32 @@ preview_object <- function(
     res <- paste0(quotes[[1]], res, quotes[[2]])
 
   res
+}
+
+
+
+
+#' Collapse text vectors with a comma
+#'
+#' @param x `character` vector
+#'
+#' @return a `character` scalar
+#' @noRd
+comma <- function(..., collapse = ", "){
+  paste(unlist(c(...)), collapse = collapse)
+}
+
+
+
+
+#' Collapse text vectors with a comma (no duplicates)
+#'
+#' @param x `character` vector
+#'
+#' @return a `character` scalar
+#' @noRd
+commaset <- function(..., collapse = ", "){
+  paste(sort(unique(unlist(c(...)))), collapse = collapse)
 }
 
 
@@ -736,5 +783,30 @@ path_tidy <- function(x){
 }
 
 
+
+
+#' Return (unique) duplicated elements of a vector or rows of a data.frame
+#'
+#' For every element/row of `x` that has at least one duplicate, return one
+#' instance of that element.
+#'
+#' @param x an [atomic] vector or [data.frame]
+#' @param ... passed on to [duplicated()]
+#'
+#' @noRd
+#'
+#' @examples
+#' dupes(c(1, 1, 1, 2))
+#' dupes(cars[c(1, 1, 1, 2), ])
+dupes <- function(x, ...){
+
+  if (is.atomic(x)){
+    sort(unique(x[duplicated(x, ...)]))
+  } else if (is.data.frame(x)){
+    res <- unique(x[duplicated(x, ...), ])
+    row.names(res) <- NULL
+    res
+  }
+}
 
 # nocov end
