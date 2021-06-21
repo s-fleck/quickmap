@@ -13,13 +13,13 @@ coverage](https://codecov.io/gh/s-fleck/smartmap/branch/master/graph/badge.svg)]
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-**smartmap** is a package for previewing spatial data as leaflet maps in
-R. It is designed primarily for interactive use and produces nice maps
-with minimal setup required. In contrast to other similar packages,
-smartmap does not require an `sf` or `sp` object as input, but *just
-works* with normal `data.frames` or `matrices` that have longitude and
-latitude columns. See [the function
-reference](https://s-fleck.github.io/smartmap/) for more info.
+**smartmap** is an R package for previewing spatial data as
+[leaflet](https://rstudio.github.io/leaflet/) maps. It is designed for
+interactive use and produces nice maps with minimal typing required. In
+contrast to other similar packages, smartmap does not require an `sf` or
+`sp` object as input, but *just works* with normal `data.frames` or
+`matrices` that have longitude and latitude columns. See [the package
+homepage](https://s-fleck.github.io/smartmap/) for more infos.
 
 ## Installation
 

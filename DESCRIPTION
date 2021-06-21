@@ -1,7 +1,7 @@
 Type: Package
 Package: smartmap
 Title: Smartly Create Maps from R Objects
-Version: 0.1.1.9000
+Version: 0.1.1.9001
 Authors@R: 
     person(given = "Stefan",
            family = "Fleck",
@@ -24,8 +24,11 @@ Imports:
     sf,
     utils
 Suggests: 
+    knitr,
     covr,
-    testthat
+    testthat,
+    leafsync,
+    rmarkdown
 Depends:
   R (>= 3.6.0)
 URL: https://github.com/s-fleck/smartmap
@@ -34,3 +37,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
+VignetteBuilder: knitr

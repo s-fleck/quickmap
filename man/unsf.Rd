@@ -2,16 +2,19 @@
 % Please edit documentation in R/utils.R
 \name{unsf}
 \alias{unsf}
-\title{Title}
+\title{Convert sf objects to normal data.frames with longitude and latitude colu,ns}
 \usage{
 unsf(x, coord_names = c("lon", "lat"))
 }
 \arguments{
-\item{coord_names}{}
+\item{x}{an \code{sf::sf} object}
+
+\item{coord_names}{\code{character} vector of length \code{2}. The names of the new
+that should contain the coordinates from the geometry column of \code{x}.}
 }
 \value{
-
+a \code{data.frame}
 }
 \description{
-Title
+Convert sf objects to normal data.frames with longitude and latitude colu,ns
 }

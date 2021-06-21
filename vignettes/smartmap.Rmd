@@ -1,0 +1,139 @@
+---
+title: "smartmap"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{smartmap}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(leaflet)
+library(leafsync)
+```
+
+```{r setup}
+library(smartmap)
+```
+smartmap produces interactive maps from a variety of R objects with minimal 
+coding required. This makes it great for previewing spatial data. It provides
+only three functions:
+
+* `smap()`: The core function. Smartly create [leaflet](https://rstudio.github.io/leaflet/)
+  maps from R objects. Maps created with `smap()` contain two dialogues in the top
+  right corner: one for switiching the background map and one for measuring 
+  distances and areas.
+* `smart_as_sf()`: Applies the same heuristics as `smap()`, but returns 
+  [sf](https://r-spatial.github.io/sf/) objects instead.
+* `as_coord_matrix`: Applies the same heuristics as `smap()`, but returns a 
+  numeric matrix with longitude and latitude instead.
+
+## Data frames
+
+Viewing `data.frames` with longitude and latitude columns was the basic use case
+for which smartmap was created. The heuristics for automatically determining
+the geo-coordinate columns are simple, but should work for most use
+cases.
+
+```{r echo = FALSE}
+cities <- data.frame(
+  city = c("Bregenz", "Eisenstadt", "Wiener Neustadt",
+    "Graz", "Klagenfurt", "Linz", "Salzburg", "Innsbruck",
+    "Vienna"),
+  LaTituDE = c(47.51669707, 47.83329908, 47.81598187,
+    47.0777582, 46.62034426, 48.31923281, 47.81047833,
+    47.28040733, 48.20001528),
+  lng = c(9.766701588, 16.53329747, 16.24995357,
+    15.41000484, 14.3100203, 14.28878129, 13.0400203,
+    11.4099906, 16.36663896),
+  pop = c(26928, 13165, 60621.5, 242780, 88588, 265161.5,
+    178274, 133840.5, 2065500),
+  country = c("Austria", "Austria", "Austria", "Austria",
+    "Austria", "Austria", "Austria", "Austria", "Austria"),
+  province = c("Vorarlberg", "Burgenland",
+    "Niederösterreich", "Steiermark", "Kärnten",
+    "Oberösterreich", "Salzburg", "Tirol", "Wien")
+)
+```
+
+```{r eval = FALSE}
+print(cities)
+smap(cities)
+```
+```{r out.width = "100%", echo = FALSE}
+print(cities)
+smap(cities)
+```
+<p style="font-size:8pt">
+    source: [World Cities Database](https://simplemaps.com/data/world-cities)
+</p>
+
+## Shapefiles
+
+`smap()` also works with file system paths or urls to shapefiles. It even
+looks inside zip files if necessary!
+
+```{r cache = TRUE, out.width = "100%"}
+smap("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip")
+
+```
+
+## Point coordinates
+
+Numeric vectors of length 2 are interpreted as longitude/latitude coordinate 
+pairs. If you supply names, smap uses them to identify the correct order. 
+
+```{r eval = FALSE}
+smap(c(16.422524, 48.185686))
+smap(c(LAT = 48.185686, LoNgItuDE = 16.422524))
+```
+```{r out.width = "100%", echo = FALSE}
+smap(c(LAT = 48.185686, LoNgItuDE = 16.422524))
+```
+
+
+## Leaflet maps
+
+You can call `smap()` on existing leaflet objects to add background tiles and
+a ruler for measuring distance
+
+```{r, eval=FALSE}
+library(leaflet)
+lf <- leaflet::leaflet(height=200) %>% 
+  leaflet::addCircleMarkers(lng = 16.422524, lat = 48.185686)
+
+lf
+smap(lf)
+```
+```{r, echo = FALSE}
+library(leaflet)
+lf <- leaflet::leaflet(height=200) %>% 
+  leaflet::addCircleMarkers(lng = 16.422524, lat = 48.185686)
+
+leafsync::sync(lf, smap(lf), sync.cursor = FALSE)
+
+```
+
+
+## Simple features (sf) 
+
+Everyone who has worked with simple features will know that it is sometimes a
+bit awkward to convert between the different datatypes provided by the package
+(`sf::sf`, `sf::sfc` and `sf::sfg`). Toe remedy this `smap()` works natively
+with all three.
+
+
+```{r, eval = FALSE}
+smap(sf::st_point(c(16.373311, 48.208482)))
+smap(sf::st_sfc(sf::st_point(c(16.373311, 48.208482))))
+smap(sf::st_sf(coords = sf::st_sfc(sf::st_point(c(16.373311, 48.208482))), crs = 4326))
+```
+```{r out.width = "100%", echo = FALSE}
+smap(sf::st_sf(coords = sf::st_sfc(sf::st_point(c(16.373311, 48.208482))), crs = 4326))
+```

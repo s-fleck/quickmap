@@ -1,6 +1,7 @@
 smartmap (dev)
 
 * add `unsf()`
+* add vignette
 
 smartmap 0.1.1
 
