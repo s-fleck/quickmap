@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert coordinate matrices to sfc objects — st_as_sfc • smartmap</title>
+<title>Convert sf objects to normal data.frames with longitude and latitude colu,ns — unsf • smartmap</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Convert coordinate matrices to sfc objects — st_as_sfc" />
-<meta property="og:description" content="Convert coordinate matrices to sfc objects" />
+<meta property="og:title" content="Convert sf objects to normal data.frames with longitude and latitude colu,ns — unsf" />
+<meta property="og:description" content="Convert sf objects to normal data.frames with longitude and latitude colu,ns" />
 
 
 
@@ -114,37 +114,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert coordinate matrices to sfc objects</h1>
-    <small class="dont-index">Source: <a href='https://github.com/s-fleck/smartmap/blob/master/R/coord_matrix.R'><code>R/coord_matrix.R</code></a></small>
-    <div class="hidden name"><code>st_as_sfc.Rd</code></div>
+    <h1>Convert sf objects to normal data.frames with longitude and latitude colu,ns</h1>
+    <small class="dont-index">Source: <a href='https://github.com/s-fleck/smartmap/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>unsf.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Convert coordinate matrices to sfc objects</p>
+    <p>Convert sf objects to normal data.frames with longitude and latitude colu,ns</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for coord_matrix</span>
-<span class='fu'>st_as_sfc</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>unsf</span><span class='op'>(</span><span class='va'>x</span>, coord_names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"lon"</span>, <span class='st'>"lat"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a <a href='as_coord_matrix.html'>coord_matrix</a></p></td>
+      <td><p>an <code><a href='https://r-spatial.github.io/sf/reference/sf.html'>sf::sf</a></code> object</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>ignored</p></td>
+      <th>coord_names</th>
+      <td><p><code>character</code> vector of length <code>2</code>. The names of the new
+that should contain the coordinates from the geometry column of <code>x</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an <code><a href='https://r-spatial.github.io/sf/reference/sfc.html'>sf::sfc()</a></code> object of subclass <code>sfc_POINT</code></p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://r-spatial.github.io/sf/reference/st_as_sfc.html'>sf::st_as_sfc()</a></code></p></div>
+    <p>a <code>data.frame</code></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
