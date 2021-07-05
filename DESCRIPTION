@@ -1,7 +1,7 @@
 Type: Package
 Package: smartmap
 Title: Smartly Create Maps from R Objects
-Version: 0.1.1.9001
+Version: 0.1.1.9002
 Authors@R: 
     person(given = "Stefan",
            family = "Fleck",

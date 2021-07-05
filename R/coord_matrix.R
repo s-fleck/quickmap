@@ -231,7 +231,7 @@ guess_loncol <- function(x){
   if (!length(cols))
     return(1L)
 
-  res <- which(tolower(cols) %in%  c("lon", "lng", "long", "longitude", "x"))
+  res <- which(tolower(cols) %in%  c("lon", "lng", "long", "longitude", "x", "pointx", "point_x"))
 
   standardize_colpos(res, x, "longitude")
 }
@@ -246,7 +246,7 @@ guess_latcol <- function(x){
   if (!length(cols))
     return(2L)
 
-  res <- which(tolower(cols) %in% c("lat", "latitude", "y"))
+  res <- which(tolower(cols) %in% c("lat", "latitude", "y", "pointy", "point_y"))
   standardize_colpos(res, x, "latitude")
 }
 
